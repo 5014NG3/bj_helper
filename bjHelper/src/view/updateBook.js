@@ -15,7 +15,7 @@ pl.view.updateBook = {
         book = Book.instances[key];
         optionEl = document.createElement("option");
         optionEl.text = book.title;
-        optionEl.text = counter.get('2');
+        //optionEl.text = counter.get('2'); figured out counter is global
         optionEl.value = book.isbn;
         selectBookEl.add( optionEl, null);
       }
