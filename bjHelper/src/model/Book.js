@@ -1,7 +1,26 @@
+const counter = new Map();
+
+counter.set('2', 1);
+counter.set('3', 1);
+counter.set('4', 1);
+counter.set('5', 1);
+counter.set('6', 1);
+counter.set('7', 0);
+counter.set('8', 0);
+counter.set('9', 0);
+counter.set('10', -1);
+counter.set('J', -1);
+counter.set('Q', -1);
+counter.set('K', -1);
+counter.set('A', -1);
+
+
 function Book( slots) {
     this.isbn = slots.isbn;
     this.title = slots.title;
     this.year = slots.year;
+    
+    
   };
 
 

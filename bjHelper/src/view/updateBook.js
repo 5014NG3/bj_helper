@@ -1,5 +1,7 @@
 pl.view.updateBook = {
     setupUserInterface: function () {
+
+
       var formEl = document.forms['Book'],
           saveButton = formEl.commit,
           selectBookEl = formEl.selectBook;
@@ -13,6 +15,7 @@ pl.view.updateBook = {
         book = Book.instances[key];
         optionEl = document.createElement("option");
         optionEl.text = book.title;
+        optionEl.text = counter.get('2');
         optionEl.value = book.isbn;
         selectBookEl.add( optionEl, null);
       }

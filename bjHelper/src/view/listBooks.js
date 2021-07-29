@@ -12,6 +12,7 @@ pl.view.listBooks = {
         row.insertCell(-1).textContent = Book.instances[key].isbn;      
         row.insertCell(-1).textContent = Book.instances[key].title;  
         row.insertCell(-1).textContent = Book.instances[key].year;
+        
       }
     }
   };
