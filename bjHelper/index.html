@@ -5,22 +5,12 @@
 
 
 
-<div id="codeRefer">
-
-</div>
-<input type="button" value="REFRESH" onclick="refer()">
-<script language="javascript">
-    function refer() {
-        $('#codeRefer').load('ajax.html#codeRefer');
-    }
-    refer();
-</script>
-
 
 <head>
   <meta charset="UTF-8" />
   <title>Minimal JS front-end App Example</title>
   <script src="src/model/Book.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 </head>
 <body>
   <h1>Public Library</h1>
@@ -89,24 +79,59 @@
 
 </body>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Minimal JS front-end App Example</title>
-  <script src="src/ctrl/initialize.js"></script>
-  <script src="src/model/Book.js"></script>
-  <script src="src/view/listBooks.js"></script>
-  <script>
-   window.addEventListener( "load", pl.view.listBooks.setupUserInterface);
-  </script>
-</head>
+
 <body>
-  <h1>Public Library: List all books s</h1>
-  <table id="books">
-    <thead><tr><th>ISBN</th><th>Title</th><th>Year</th></tr></thead>
-    <tbody></tbody>
-  </table>
-  <nav><a href="index.html">Back to main menu</a></nav>
-</body>
+<h1> tst </h1> 
+<button type = "button" onclick = "reload();"> test button </button> 
+<div id = "fart">
+
+test div
+
+</div> 
+
+<button type = "button" onclick = "cls();"> clear local storage </button> 
+
+</body> 
+
+
+
+<script> 
+
+function cls(){
+
+localStorage.clear();
+
+}
+
+</script> 
+
+
+
+
+<script>
+function reload(){
+
+    if(localStorage.length == 0){
+    
+    var tempNum = parseInt(counter.get('A'));
+    localStorage.setItem("test",tempNum);
+    document.getElementById("fart").innerHTML = tempNum;
+    
+  }
+
+  else{
+    var num = parseInt(localStorage.getItem("test"));
+
+    num = num + 1;
+    localStorage.setItem("test",num);
+    console.log(num);
+    document.getElementById("fart").innerHTML = num;
+
+  }
+   
+    
+} 
+</script>
 
 
 

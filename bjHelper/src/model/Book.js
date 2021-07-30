@@ -96,7 +96,7 @@ function Book( slots) {
   };
 
   Book.clearData = function () {
-    if (confirm("Do you really want to delete all book data?")) {
+    //if (confirm("Do you really want to delete all book data?")) {
       localStorage["bookTable"] = "{}";
-    }
+   // }
   };
