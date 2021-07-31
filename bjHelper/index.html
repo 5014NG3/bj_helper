@@ -80,6 +80,10 @@
 </body>
 
 
+
+
+
+
 <body>
 <h1> tst </h1> 
 <button type = "button" onclick = "reload();"> test button </button> 
@@ -92,6 +96,11 @@ test div
 <button type = "button" onclick = "cls();"> clear local storage </button> 
 
 </body> 
+
+
+
+
+
 
 
 
@@ -132,6 +141,41 @@ function reload(){
     
 } 
 </script>
+
+
+<script> 
+
+function loader(){
+
+  if(localStorage.length == 0){
+
+    document.getElementById("fart").innerHTML = "this shit is 0";
+
+  }
+
+  else{
+
+     var num = parseInt(localStorage.getItem("test"));
+
+    document.getElementById("fart").innerHTML = num;
+
+  }
+
+  
+
+
+
+}
+
+
+</script> 
+
+<script> 
+document.onload = loader();
+ </script> 
+
+
+
 
 
 
