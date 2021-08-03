@@ -14,6 +14,26 @@ counter.set('Q', -1);
 counter.set('K', -1);
 counter.set('A', -1);
 
+///*
+
+//localStorage.setItem("shoe_size","null");
+
+
+localStorage.setItem("2","1");
+localStorage.setItem("3","1");
+localStorage.setItem("4","1");
+localStorage.setItem("5","1");
+localStorage.setItem("6","1");
+localStorage.setItem("7","0");
+localStorage.setItem("8","0");
+localStorage.setItem("9","0");
+localStorage.setItem("10","-1");
+localStorage.setItem("A","-1");
+localStorage.setItem("J","-1");
+localStorage.setItem("Q","-1");
+localStorage.setItem("K","-1");
+//*/
+
 
 function Book( slots) {
     this.isbn = slots.isbn;
@@ -114,22 +134,24 @@ function Book( slots) {
 
   Book.reload = function(){
 
-      if(localStorage.length == 0){
+
+
+    if (localStorage.getItem("test")){
+      var num = parseInt(localStorage.getItem("test"));
+
+      num = num + 1;
+      localStorage.setItem("test",num);
+      //console.log(num);
+      document.getElementById("fart").innerHTML = num;
+
+    }
+
+    else{
       
       var tempNum = parseInt(counter.get('A'));
       localStorage.setItem("test",tempNum);
       document.getElementById("fart").innerHTML = tempNum;
       
-    }
-
-    else{
-      var num = parseInt(localStorage.getItem("test"));
-
-      num = num + 1;
-      localStorage.setItem("test",num);
-      console.log(num);
-      document.getElementById("fart").innerHTML = num;
-
     }
     
       
@@ -138,21 +160,58 @@ function Book( slots) {
 
   Book.loader =  function(){
 
-    if(localStorage.length == 0){
+
+    if(localStorage.getItem("shoe_size")){
+
+      document.getElementById("change_shoe").innerHTML = localStorage.getItem("shoe_size");
+    
+    }
+
+    else{
+
+      document.getElementById("change_shoe").innerHTML = "null";
+
+
+    }
+
+
+    if(localStorage.getItem("test")){
+
+      
+
+      var num = parseInt(localStorage.getItem("test"));
+
+      //console.log(num);
+
+      document.getElementById("fart").innerHTML = num;
+
+    }
+    else{
 
       document.getElementById("fart").innerHTML = "this shit is 0";
 
     }
 
-    else{
-
-      var num = parseInt(localStorage.getItem("test"));
-
-      document.getElementById("fart").innerHTML = num;
-
-    }
-
   };
+
+Book.setShoe = function (x){
+
+
+
+
+
+    var num = parseInt(x);
+
+    localStorage.setItem("shoe_size",num);
+
+
+    document.getElementById("change_shoe").innerHTML = num;
+
+    
+
+
+
+}; 
 
 
 

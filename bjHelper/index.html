@@ -21,22 +21,23 @@
     <li><a href="createBook.html"><button type="button">Add a new book</button></a></li>
     <li><a href="updateBook.html"><button type="button">Update a book</button></a></li>
     <li><a href="deleteBook.html"><button type="button">Delete a book</button></a></li>
-    <li><button type="button" onclick="Book.clearData()">Clear database</button></li>
+    <li><button type="button" onclick="Book.setShoe()">Clear database</button></li>
     <li><button type="button" onclick="Book.createTestData()">Create test data</button></li>
   </menu>
 
 
-  <p>choose shoe size</p>
+  <div style = "float:left;">choose shoe size : &emsp; </div>
+  <div id = "change_shoe">   null </div> 
   <div id="shoe size">
     <button>undo</button>
-    <button type = "button" onclick = "Book.clearData()">1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>7</button>
-    <button>8</button>
+    <button type = "button" onclick = "Book.setShoe(1)">1</button>
+    <button type = "button" onclick = "Book.setShoe(2)">2</button>
+    <button type = "button" onclick = "Book.setShoe(3)">3</button>
+    <button type = "button" onclick = "Book.setShoe(4)">4</button>
+    <button type = "button" onclick = "Book.setShoe(5)">5</button>
+    <button type = "button" onclick = "Book.setShoe(6)">6</button>
+    <button type = "button" onclick = "Book.setShoe(7)">7</button>
+    <button type = "button" onclick = "Book.setShoe(8)">8</button>
     <button>redo</button>
   </div><br />
 
@@ -86,7 +87,7 @@
 
 <body>
 <h1> tst </h1> 
-<button type = "button" onclick = "Book.reload();"> test button </button> 
+<button type = "button" onclick = "Book.reload()"> test button </button> 
 <div id = "fart">
 
 test div
