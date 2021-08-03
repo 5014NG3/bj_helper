@@ -100,3 +100,63 @@ function Book( slots) {
       localStorage["bookTable"] = "{}";
    // }
   };
+
+
+
+  Book.cls = function(){
+
+  localStorage.clear();
+
+  };
+
+
+
+
+  Book.reload = function(){
+
+      if(localStorage.length == 0){
+      
+      var tempNum = parseInt(counter.get('A'));
+      localStorage.setItem("test",tempNum);
+      document.getElementById("fart").innerHTML = tempNum;
+      
+    }
+
+    else{
+      var num = parseInt(localStorage.getItem("test"));
+
+      num = num + 1;
+      localStorage.setItem("test",num);
+      console.log(num);
+      document.getElementById("fart").innerHTML = num;
+
+    }
+    
+      
+  };
+
+
+  Book.loader =  function(){
+
+    if(localStorage.length == 0){
+
+      document.getElementById("fart").innerHTML = "this shit is 0";
+
+    }
+
+    else{
+
+      var num = parseInt(localStorage.getItem("test"));
+
+      document.getElementById("fart").innerHTML = num;
+
+    }
+
+  };
+
+
+
+
+
+
+

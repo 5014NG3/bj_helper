@@ -86,92 +86,22 @@
 
 <body>
 <h1> tst </h1> 
-<button type = "button" onclick = "reload();"> test button </button> 
+<button type = "button" onclick = "Book.reload();"> test button </button> 
 <div id = "fart">
 
 test div
 
 </div> 
 
-<button type = "button" onclick = "cls();"> clear local storage </button> 
+<button type = "button" onclick = "Book.cls();"> clear local storage </button> 
 
 </body> 
 
 
 
 
-
-
-
-
 <script> 
-
-function cls(){
-
-localStorage.clear();
-
-}
-
-</script> 
-
-
-
-
-<script>
-function reload(){
-
-    if(localStorage.length == 0){
-    
-    var tempNum = parseInt(counter.get('A'));
-    localStorage.setItem("test",tempNum);
-    document.getElementById("fart").innerHTML = tempNum;
-    
-  }
-
-  else{
-    var num = parseInt(localStorage.getItem("test"));
-
-    num = num + 1;
-    localStorage.setItem("test",num);
-    console.log(num);
-    document.getElementById("fart").innerHTML = num;
-
-  }
-   
-    
-} 
-</script>
-
-
-<script> 
-
-function loader(){
-
-  if(localStorage.length == 0){
-
-    document.getElementById("fart").innerHTML = "this shit is 0";
-
-  }
-
-  else{
-
-     var num = parseInt(localStorage.getItem("test"));
-
-    document.getElementById("fart").innerHTML = num;
-
-  }
-
-  
-
-
-
-}
-
-
-</script> 
-
-<script> 
-document.onload = loader();
+document.onload = Book.loader();
  </script> 
 
 
