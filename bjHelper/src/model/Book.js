@@ -126,6 +126,7 @@ function Book( slots) {
   Book.cls = function(){
 
   localStorage.removeItem("rc");
+  localStorage.removeItem("cardCount")
 
   };
 
@@ -158,61 +159,7 @@ function Book( slots) {
   };
 
 
-  Book.loader =  function(){
-
-
-    if(localStorage.getItem("shoe_size")){
-
-      document.getElementById("change_shoe").innerHTML = localStorage.getItem("shoe_size");
-    
-    }
-
-    else{
-
-      document.getElementById("change_shoe").innerHTML = "null";
-
-
-    }
-
-
-    if(localStorage.getItem("test")){
-
-      
-
-      var num = parseInt(localStorage.getItem("test"));
-
-      //console.log(num);
-
-      document.getElementById("fart").innerHTML = num;
-
-    }
-    else{
-
-      document.getElementById("fart").innerHTML = "this shit is 0";
-
-    }
-
-  };
-
-Book.setShoe = function (x){
-
-
-
-
-
-    var num = parseInt(x);
-
-    localStorage.setItem("shoe_size",num);
-
-
-    document.getElementById("change_shoe").innerHTML = num;
-
-    
-
-
-
-}; 
-
+  
 
 Book.runningCount = function(x){
 
@@ -269,9 +216,112 @@ Book.runningCount = function(x){
 
 //Book.check
 
+Book.cardCount = function(){
+
+
+  if(!localStorage.getItem("cardCount")){
+
+    localStorage.setItem("cardCount",1);
+    document.getElementById("cardsCount").innerHTML = 1;
+  }
+  else{
+    var num = parseInt (localStorage.getItem("cardCount"));
+
+    num+=1;
+
+    localStorage.setItem("cardCount",num);
+
+    document.getElementById("cardsCount").innerHTML = num;
+
+  }
 
 
 
 
+
+};
+
+
+Book.setShoe = function (x){
+
+
+
+
+
+  var num = parseInt(x);
+
+  localStorage.setItem("shoe_size",num);
+
+
+  document.getElementById("change_shoe").innerHTML = num;
+
+  
+
+
+
+}; 
+
+
+
+
+
+Book.loader =  function(){
+
+  if(localStorage.getItem("cardCount")){
+
+    document.getElementById("cardsCount").innerHTML = localStorage.getItem("cardCount");
+  }
+
+  else{
+
+    ocument.getElementById("cardsCount").innerHTML = 0;
+  }
+
+
+
+  if(localStorage.getItem("rc")){
+
+    document.getElementById("rct").innerHTML = localStorage.getItem("rc");
+
+  }
+
+  else{
+    document.getElementById("change_shoe").innerHTML = 0;
+
+  }
+
+
+  if(localStorage.getItem("shoe_size")){
+
+    document.getElementById("change_shoe").innerHTML = localStorage.getItem("shoe_size");
+  
+  }
+
+  else{
+
+    document.getElementById("change_shoe").innerHTML = "null";
+
+
+  }
+
+
+  if(localStorage.getItem("test")){
+
+    
+
+    var num = parseInt(localStorage.getItem("test"));
+
+    //console.log(num);
+
+    document.getElementById("fart").innerHTML = num;
+
+  }
+  else{
+
+    document.getElementById("fart").innerHTML = "this shit is 0";
+
+  }
+
+};
 
 
