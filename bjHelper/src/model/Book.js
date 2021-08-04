@@ -28,10 +28,10 @@ localStorage.setItem("7","0");
 localStorage.setItem("8","0");
 localStorage.setItem("9","0");
 localStorage.setItem("10","-1");
-localStorage.setItem("A","-1");
-localStorage.setItem("J","-1");
-localStorage.setItem("Q","-1");
-localStorage.setItem("K","-1");
+localStorage.setItem("11","-1");
+localStorage.setItem("12","-1");
+localStorage.setItem("13","-1");
+localStorage.setItem("14","-1");
 //*/
 
 
@@ -125,7 +125,7 @@ function Book( slots) {
 
   Book.cls = function(){
 
-  localStorage.clear();
+  localStorage.removeItem("rc");
 
   };
 
@@ -212,6 +212,62 @@ Book.setShoe = function (x){
 
 
 }; 
+
+
+Book.runningCount = function(x){
+
+
+  var num = parseInt(x);
+
+  if(!localStorage.getItem("rc")){
+
+    if(num >= 2 && num <= 6){
+      var temp = 1;
+
+    }
+    if(num >= 10 && num <= 14){
+      var temp = -1;
+
+    }
+
+    localStorage.setItem("rc",temp);
+    document.getElementById("rct").innerHTML = temp;
+
+
+  }
+
+  else{
+
+    var count = parseInt( localStorage.getItem("rc") ); 
+    if(num >= 2 && num <= 6){
+
+      localStorage.setItem("rc",count + 1); 
+      document.getElementById("rct").innerHTML = parseInt( localStorage.getItem("rc") );
+
+    }
+
+    if(num >= 10 && num <= 14){
+
+      localStorage.setItem("rc",count - 1); 
+      document.getElementById("rct").innerHTML = parseInt( localStorage.getItem("rc") );
+    }
+
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+};
+
+//Book.check
 
 
 
