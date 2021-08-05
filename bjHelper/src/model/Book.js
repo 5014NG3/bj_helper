@@ -201,15 +201,7 @@ Book.runningCount = function(x){
 
 
 
-
-
-
   }
-
-
-
-
-
 
 
 };
@@ -235,18 +227,10 @@ Book.cardCount = function(){
 
   }
 
-
-
-
-
 };
 
 
 Book.setShoe = function (x){
-
-
-
-
 
   var num = parseInt(x);
 
