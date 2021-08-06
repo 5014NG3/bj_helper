@@ -14,25 +14,7 @@ counter.set('Q', -1);
 counter.set('K', -1);
 counter.set('A', -1);
 
-///*
 
-//localStorage.setItem("shoe_size","null");
-
-
-localStorage.setItem("2","1");
-localStorage.setItem("3","1");
-localStorage.setItem("4","1");
-localStorage.setItem("5","1");
-localStorage.setItem("6","1");
-localStorage.setItem("7","0");
-localStorage.setItem("8","0");
-localStorage.setItem("9","0");
-localStorage.setItem("10","-1");
-localStorage.setItem("11","-1");
-localStorage.setItem("12","-1");
-localStorage.setItem("13","-1");
-localStorage.setItem("14","-1");
-//*/
 
 
 function Book( slots) {
@@ -234,7 +216,61 @@ Book.setShoe = function (x){
 
   var num = parseInt(x);
 
+
+  var cards = 4*num;
+
+  localStorage.setItem("shoe_total",52*num);
+
+  localStorage.setItem("2",cards);
+  localStorage.setItem("3",cards);
+  localStorage.setItem("4",cards);
+  localStorage.setItem("5",cards);
+  localStorage.setItem("6",cards);
+  localStorage.setItem("7",cards);
+  localStorage.setItem("8",cards);
+  localStorage.setItem("9",cards);
+  localStorage.setItem("10",cards);
+  localStorage.setItem("11",cards);
+  localStorage.setItem("12",cards);
+  localStorage.setItem("13",cards);
+  localStorage.setItem("14",cards);
+
+
+
+
+var odd = ((cards/(52*num))*(100)).toPrecision(4);
+
+
+console.log(odd);
+
+
+
+
+
+  document.getElementById("2").innerHTML = odd;
+  document.getElementById("3").innerHTML = odd;
+  document.getElementById("4").innerHTML = odd;
+  document.getElementById("5").innerHTML = odd;
+  document.getElementById("6").innerHTML = odd;
+  document.getElementById("7").innerHTML = odd;
+  document.getElementById("8").innerHTML = odd;
+  document.getElementById("9").innerHTML = odd;
+  document.getElementById("10").innerHTML = odd;
+  document.getElementById("11").innerHTML = odd;
+  document.getElementById("12").innerHTML = odd;
+  document.getElementById("13").innerHTML = odd;
+  document.getElementById("14").innerHTML = odd;
+
+
+
+
+
+
+  //console.log(localStorage.getItem("2"));
+
   localStorage.setItem("shoe_size",num);
+
+
 
 
   document.getElementById("change_shoe").innerHTML = num;
@@ -244,6 +280,23 @@ Book.setShoe = function (x){
 
 
 }; 
+
+
+Book.cardOdds = function(x){
+
+  //need to check if localstorage holds correct amount of 
+  //card needed for division, ie nonnegative digit
+
+  var num = parseInt(x);
+
+
+  num = num/localStorage.getItem()
+
+
+
+
+
+};
 
 
 
@@ -258,7 +311,7 @@ Book.loader =  function(){
 
   else{
 
-    ocument.getElementById("cardsCount").innerHTML = 0;
+    document.getElementById("cardsCount").innerHTML = 0;
   }
 
 
@@ -278,6 +331,7 @@ Book.loader =  function(){
   if(localStorage.getItem("shoe_size")){
 
     document.getElementById("change_shoe").innerHTML = localStorage.getItem("shoe_size");
+    console.log(localStorage.getItem("shoe_size"));
   
   }
 
@@ -295,7 +349,6 @@ Book.loader =  function(){
 
     var num = parseInt(localStorage.getItem("test"));
 
-    //console.log(num);
 
     document.getElementById("fart").innerHTML = num;
 
