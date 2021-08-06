@@ -9,10 +9,29 @@ counter.set('7', 0);
 counter.set('8', 0);
 counter.set('9', 0);
 counter.set('10', -1);
-counter.set('J', -1);
-counter.set('Q', -1);
-counter.set('K', -1);
-counter.set('A', -1);
+counter.set('11', -1);
+counter.set('12', -1);
+counter.set('13', -1);
+counter.set('14', -1);
+
+
+const convertToCard = new Map();
+
+convertToCard.set(2,2);
+convertToCard.set(3,3);
+convertToCard.set(4,4);
+convertToCard.set(5,5);
+convertToCard.set(6,6);
+convertToCard.set(7,7);
+convertToCard.set(8,8);
+convertToCard.set(9,9);
+convertToCard.set(10,10);
+convertToCard.set(11,'J');
+convertToCard.set(12,'Q');
+convertToCard.set(13,'K');
+convertToCard.set(14,'A');
+
+
 
 
 
@@ -107,8 +126,9 @@ function Book( slots) {
 
   Book.cls = function(){
 
-  localStorage.removeItem("rc");
-  localStorage.removeItem("cardCount")
+  //localStorage.removeItem("rc");
+  //localStorage.removeItem("cardCount")
+  localStorage.clear();
 
   };
 
@@ -144,6 +164,9 @@ function Book( slots) {
   
 
 Book.runningCount = function(x){
+
+
+  console.log(x);
 
 
   var num = parseInt(x);
@@ -190,7 +213,36 @@ Book.runningCount = function(x){
 
 //Book.check
 
-Book.cardCount = function(){
+Book.cardCounter = function(x){
+
+
+  console.log(x);
+
+
+  
+
+  var currentCard = parseInt(x);
+
+  //console.log(localStorage.getItem(currentCard));
+
+  var cardsLeft = parseInt(localStorage.getItem("shoe_total"));
+
+
+  localStorage.setItem("shoe_total",cardsLeft-1);
+
+  var ccc = parseInt(localStorage.getItem(currentCard)); //current card count
+
+  localStorage.setItem(currentCard,ccc-1);
+
+  //console.log(localStorage.getItem(currentCard));
+
+  Book.cardOdds();
+
+
+
+  
+  
+
 
 
   if(!localStorage.getItem("cardCount")){
@@ -212,7 +264,59 @@ Book.cardCount = function(){
 };
 
 
+Book.cardOdds = function(){
+
+  var num = parseInt(localStorage.getItem("shoe_total"));
+
+  if(num){
+
+  document.getElementById("2").innerHTML = ((localStorage.getItem("2")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("3").innerHTML = ((localStorage.getItem("3")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("4").innerHTML = ((localStorage.getItem("4")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("5").innerHTML = ((localStorage.getItem("5")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("6").innerHTML = ((localStorage.getItem("6")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("7").innerHTML = ((localStorage.getItem("7")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("8").innerHTML = ((localStorage.getItem("8")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("9").innerHTML = ((localStorage.getItem("9")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("10").innerHTML = ((localStorage.getItem("10")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("11").innerHTML = ((localStorage.getItem("11")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("12").innerHTML = ((localStorage.getItem("12")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("13").innerHTML = ((localStorage.getItem("13")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  document.getElementById("14").innerHTML = ((localStorage.getItem("14")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+
+  }
+
+  else{
+
+    document.getElementById("2").innerHTML = 0;
+    document.getElementById("3").innerHTML = 0;
+    document.getElementById("4").innerHTML = 0;
+    document.getElementById("5").innerHTML = 0;
+    document.getElementById("6").innerHTML = 0;
+    document.getElementById("7").innerHTML = 0;
+    document.getElementById("8").innerHTML = 0;
+    document.getElementById("9").innerHTML = 0;
+    document.getElementById("10").innerHTML = 0;
+    document.getElementById("11").innerHTML = 0;
+    document.getElementById("12").innerHTML = 0;
+    document.getElementById("13").innerHTML = 0;
+    document.getElementById("14").innerHTML = 0;
+    
+
+
+
+  }
+
+
+
+
+
+
+};
+
 Book.setShoe = function (x){
+
+  if (confirm("Clicking this will reset everything")) {
 
   var num = parseInt(x);
 
@@ -238,14 +342,10 @@ Book.setShoe = function (x){
 
 
 
-var odd = ((cards/(52*num))*(100)).toPrecision(4);
+  var odd = 7.69;
 
 
 console.log(odd);
-
-
-
-
 
   document.getElementById("2").innerHTML = odd;
   document.getElementById("3").innerHTML = odd;
@@ -263,17 +363,18 @@ console.log(odd);
 
 
 
-
-
-
-  //console.log(localStorage.getItem("2"));
-
   localStorage.setItem("shoe_size",num);
 
 
 
 
   document.getElementById("change_shoe").innerHTML = num;
+
+  }
+
+  else{
+
+  }
 
   
 
@@ -282,21 +383,46 @@ console.log(odd);
 }; 
 
 
-Book.cardOdds = function(x){
 
-  //need to check if localstorage holds correct amount of 
-  //card needed for division, ie nonnegative digit
+Book.isValidCard = function(x){
 
-  var num = parseInt(x);
+console.log(x);
+
+var num = parseInt(x);
+
+//console.log("num" + num);
+
+console.log(localStorage.getItem(num));
 
 
-  num = num/localStorage.getItem()
+if(localStorage.getItem(num) >= 1){
 
+  Book.runningCount(num);
+  Book.cardCounter(num);
+  //Book.cardOdds(num);
+
+
+}
+
+else{
+
+  var message = "There are no ";
+
+  message += convertToCard.get(x);
+  message += "'s left"
+
+  if (confirm(message)) {
+  }
+
+
+
+}
 
 
 
 
 };
+
 
 
 
@@ -317,13 +443,15 @@ Book.loader =  function(){
 
 
   if(localStorage.getItem("rc")){
+    console.log(localStorage.getItem("rc"));
 
     document.getElementById("rct").innerHTML = localStorage.getItem("rc");
 
   }
 
   else{
-    document.getElementById("change_shoe").innerHTML = 0;
+    console.log("here");
+    document.getElementById("rct").innerHTML = 0;
 
   }
 
