@@ -166,32 +166,37 @@ function Book( slots) {
 Book.runningCount = function(x){
 
 
-  //console.log(x);
-
-
   var num = parseInt(x);
 
   if(!localStorage.getItem("rc")){
 
     if(num >= 2 && num <= 6){
-      var temp = 1;
+
+      localStorage.setItem("rc",1);
+      document.getElementById("rct").innerHTML = 1;
+      Book.trueCount();
 
     }
-    if(num >= 10 && num <= 14){
-      var temp = -1;
+    else if(num >= 10 && num <= 14){
+
+      localStorage.setItem("rc",-1);
+      document.getElementById("rct").innerHTML = -1;
+      Book.trueCount();
 
     }
+    else{
 
-    localStorage.setItem("rc",temp);
-    document.getElementById("rct").innerHTML = temp;
-    Book.trueCount();
-
-
+      localStorage.setItem("rc",0);
+      document.getElementById("rct").innerHTML = 0;
+      Book.trueCount();
+    }
+    
   }
 
   else{
 
     var count = parseInt( localStorage.getItem("rc") ); 
+
     if(num >= 2 && num <= 6){
 
       localStorage.setItem("rc",count + 1); 
@@ -200,27 +205,29 @@ Book.runningCount = function(x){
 
     }
 
-    if(num >= 10 && num <= 14){
+    else if(num >= 10 && num <= 14){
 
       localStorage.setItem("rc",count - 1); 
       document.getElementById("rct").innerHTML = parseInt( localStorage.getItem("rc") );
       Book.trueCount();
     }
 
+    else{
 
+      Book.trueCount();
+    }
 
   }
-
-
-
 
 };
 
 Book.trueCount = function(){
 
   var num = parseInt(localStorage.getItem("rc"));
+  console.log("num " + num);
 
   var decksLeft = parseInt(localStorage.getItem("shoe_total"))/52;
+  console.log("deeall " + decksLeft);
 
   if(decksLeft > 1 ){
 
@@ -509,6 +516,7 @@ if(localStorage.getItem(num) >= 1){
 
   Book.runningCount(num);
   Book.cardCounter(num);
+  //Book.trueCount();
   //Book.cardOdds(num);
 
 
