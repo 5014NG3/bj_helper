@@ -151,7 +151,7 @@ function Book( slots) {
 
     else{
       
-      var tempNum = parseInt(counter.get('A'));
+      var tempNum = parseInt(counter.get('14'));
       localStorage.setItem("test",tempNum);
       document.getElementById("fart").innerHTML = tempNum;
       
@@ -270,6 +270,65 @@ Book.cardOdds = function(){
 
   if(num){
 
+
+  
+  var num = ((localStorage.getItem("2")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("2_odds",num);
+  document.getElementById("2").innerHTML = num;
+
+  num = ((localStorage.getItem("3")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("3_odds",num);
+  document.getElementById("3").innerHTML = num;
+
+  num = ((localStorage.getItem("4")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("4_odds",num);
+  document.getElementById("4").innerHTML = num;
+
+  num = ((localStorage.getItem("5")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("5_odds",num);
+  document.getElementById("5").innerHTML = num;
+
+  num = ((localStorage.getItem("6")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("6_odds",num);
+  document.getElementById("6").innerHTML = num;
+
+  num = ((localStorage.getItem("7")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("7_odds",num);
+  document.getElementById("7").innerHTML = num;
+
+  num = ((localStorage.getItem("8")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("8_odds",num);
+  document.getElementById("8").innerHTML = num;
+
+  num = ((localStorage.getItem("9")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("9_odds",num);
+  document.getElementById("9").innerHTML = num;
+
+  num = ((localStorage.getItem("10")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("10_odds",num);
+  document.getElementById("10").innerHTML = num;
+
+  num = ((localStorage.getItem("11")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("11_odds",num);
+  document.getElementById("11").innerHTML = num;
+
+  num = ((localStorage.getItem("12")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("12_odds",num);
+  document.getElementById("12").innerHTML = num;
+
+  num = ((localStorage.getItem("13")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("13_odds",num);
+  document.getElementById("13").innerHTML = num;
+
+  num = ((localStorage.getItem("14")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  localStorage.setItem("14_odds",num);
+  document.getElementById("14").innerHTML = num;
+
+
+
+
+
+  /*
   document.getElementById("2").innerHTML = ((localStorage.getItem("2")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
   document.getElementById("3").innerHTML = ((localStorage.getItem("3")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
   document.getElementById("4").innerHTML = ((localStorage.getItem("4")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
@@ -283,11 +342,60 @@ Book.cardOdds = function(){
   document.getElementById("12").innerHTML = ((localStorage.getItem("12")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
   document.getElementById("13").innerHTML = ((localStorage.getItem("13")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
   document.getElementById("14").innerHTML = ((localStorage.getItem("14")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
+  */
 
   }
 
   else{
 
+
+    var num = 0;
+
+    num = num.toFixed(2);
+    localStorage.setItem("2_odds",num);
+    document.getElementById("2").innerHTML = num;
+
+    localStorage.setItem("3_odds",num);
+    document.getElementById("3").innerHTML = num;
+
+    localStorage.setItem("4_odds",num);
+    document.getElementById("4").innerHTML = num;
+
+    localStorage.setItem("5_odds",num);
+    document.getElementById("5").innerHTML = num;
+
+    localStorage.setItem("6_odds",num);
+    document.getElementById("6").innerHTML = num;
+
+    localStorage.setItem("7_odds",num);
+    document.getElementById("7").innerHTML = num;
+
+    localStorage.setItem("8_odds",num);
+    document.getElementById("8").innerHTML = num;
+
+    localStorage.setItem("9_odds",num);
+    document.getElementById("9").innerHTML = num;
+
+    localStorage.setItem("10_odds",num);
+    document.getElementById("10").innerHTML = num;
+
+    localStorage.setItem("11_odds",num);
+    document.getElementById("11").innerHTML = num;
+
+    localStorage.setItem("12_odds",num);
+    document.getElementById("12").innerHTML = num;
+
+    localStorage.setItem("13_odds",num);
+    document.getElementById("13").innerHTML = num;
+
+    localStorage.setItem("14_odds",num);
+    document.getElementById("14").innerHTML = num;
+
+    
+
+
+
+    /*
     document.getElementById("2").innerHTML = 0;
     document.getElementById("3").innerHTML = 0;
     document.getElementById("4").innerHTML = 0;
@@ -301,6 +409,7 @@ Book.cardOdds = function(){
     document.getElementById("12").innerHTML = 0;
     document.getElementById("13").innerHTML = 0;
     document.getElementById("14").innerHTML = 0;
+    */
     
 
 
@@ -486,6 +595,109 @@ Book.loader =  function(){
     document.getElementById("fart").innerHTML = "this shit is 0";
 
   }
+
+
+
+
+
+};
+
+Book.loadOdds = function(){
+
+
+  if(localStorage.getItem("2_odds") !== null){
+
+    document.getElementById("2").innerHTML = localStorage.getItem("2_odds");
+
+
+  }
+
+  if(localStorage.getItem("3_odds") !== null){
+
+    document.getElementById("3").innerHTML = localStorage.getItem("3_odds");
+
+
+  }
+
+  if(localStorage.getItem("4_odds") !== null){
+
+    document.getElementById("4").innerHTML = localStorage.getItem("4_odds");
+
+
+  }
+
+  if(localStorage.getItem("5_odds") !== null){
+
+    document.getElementById("5").innerHTML = localStorage.getItem("5_odds");
+
+
+  }
+
+  if(localStorage.getItem("6_odds") !== null){
+
+    document.getElementById("6").innerHTML = localStorage.getItem("6_odds");
+
+
+  }
+
+  if(localStorage.getItem("7_odds") !== null){
+
+    document.getElementById("7").innerHTML = localStorage.getItem("7_odds");
+
+
+  }
+
+  if(localStorage.getItem("8_odds") !== null){
+
+    document.getElementById("8").innerHTML = localStorage.getItem("8_odds");
+
+
+  }
+
+  if(localStorage.getItem("9_odds") !== null){
+
+    document.getElementById("9").innerHTML = localStorage.getItem("9_odds");
+
+
+  }
+
+  if(localStorage.getItem("10_odds") !== null){
+
+    document.getElementById("10").innerHTML = localStorage.getItem("10_odds");
+
+
+  }
+
+  if(localStorage.getItem("11_odds") !== null){
+
+    document.getElementById("11").innerHTML = localStorage.getItem("2_odds");
+
+
+  }
+
+  if(localStorage.getItem("12_odds") !== null){
+
+    document.getElementById("12").innerHTML = localStorage.getItem("12_odds");
+
+
+  }
+
+  if(localStorage.getItem("13_odds") !== null){
+
+    document.getElementById("13").innerHTML = localStorage.getItem("13_odds");
+
+
+  }
+
+  if(localStorage.getItem("14_odds") !== null){
+
+    document.getElementById("14").innerHTML = localStorage.getItem("14_odds");
+
+
+  }
+
+
+
 
 };
 
