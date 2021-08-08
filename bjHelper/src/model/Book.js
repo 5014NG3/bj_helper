@@ -64,7 +64,7 @@ function Book( slots) {
     if (bookTableString) {
       bookTable = JSON.parse( bookTableString);
       keys = Object.keys( bookTable);
-      console.log( keys.length +" books loaded.");
+      //console.log( keys.length +" books loaded.");
       for (i=0; i < keys.length; i++) {
         key = keys[i];
         Book.instances[key] = Book.convertRow2Obj( bookTable[key]);
@@ -88,7 +88,7 @@ function Book( slots) {
   Book.add = function (slots) {
     var book = new Book( slots);
     Book.instances[slots.isbn] = book;
-    console.log("Book " + slots.isbn + " created!");
+    //console.log("Book " + slots.isbn + " created!");
   };
 
   Book.update = function (slots) {
@@ -96,15 +96,15 @@ function Book( slots) {
     var year = parseInt( slots.year);
     if (book.title !== slots.title) { book.title = slots.title;}
     if (book.year !== year) { book.year = year;}
-    console.log("Book " + slots.isbn + " modified!");
+    //console.log("Book " + slots.isbn + " modified!");
   };
 
   Book.destroy = function (isbn) {
     if (Book.instances[isbn]) {
-      console.log("Book " + isbn + " deleted");
+      //console.log("Book " + isbn + " deleted");
       delete Book.instances[isbn];
     } else {
-      console.log("There is no book with ISBN " + isbn + " in the database!");
+      //console.log("There is no book with ISBN " + isbn + " in the database!");
     }
   };
 
@@ -166,7 +166,7 @@ function Book( slots) {
 Book.runningCount = function(x){
 
 
-  console.log(x);
+  //console.log(x);
 
 
   var num = parseInt(x);
@@ -184,6 +184,7 @@ Book.runningCount = function(x){
 
     localStorage.setItem("rc",temp);
     document.getElementById("rct").innerHTML = temp;
+    Book.trueCount();
 
 
   }
@@ -195,6 +196,7 @@ Book.runningCount = function(x){
 
       localStorage.setItem("rc",count + 1); 
       document.getElementById("rct").innerHTML = parseInt( localStorage.getItem("rc") );
+      Book.trueCount();
 
     }
 
@@ -202,6 +204,7 @@ Book.runningCount = function(x){
 
       localStorage.setItem("rc",count - 1); 
       document.getElementById("rct").innerHTML = parseInt( localStorage.getItem("rc") );
+      Book.trueCount();
     }
 
 
@@ -209,14 +212,53 @@ Book.runningCount = function(x){
   }
 
 
+
+
 };
 
-//Book.check
+Book.trueCount = function(){
+
+  var num = parseInt(localStorage.getItem("rc"));
+
+  var decksLeft = parseInt(localStorage.getItem("shoe_total"))/52;
+
+  if(decksLeft > 1 ){
+
+    console.log("here");
+
+
+    var tc = num / decksLeft;
+
+  }
+
+  else{
+
+    console.log("here2");
+
+    var tc = num;
+
+  }
+
+  document.getElementById("true_count").innerHTML = tc.toFixed(2);
+
+  localStorage.setItem("true_count",tc);
+
+
+
+
+
+  
+
+
+
+
+
+};
 
 Book.cardCounter = function(x){
 
 
-  console.log(x);
+  //console.log(x);
 
 
   
@@ -326,24 +368,6 @@ Book.cardOdds = function(){
 
 
 
-
-
-  /*
-  document.getElementById("2").innerHTML = ((localStorage.getItem("2")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("3").innerHTML = ((localStorage.getItem("3")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("4").innerHTML = ((localStorage.getItem("4")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("5").innerHTML = ((localStorage.getItem("5")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("6").innerHTML = ((localStorage.getItem("6")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("7").innerHTML = ((localStorage.getItem("7")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("8").innerHTML = ((localStorage.getItem("8")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("9").innerHTML = ((localStorage.getItem("9")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("10").innerHTML = ((localStorage.getItem("10")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("11").innerHTML = ((localStorage.getItem("11")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("12").innerHTML = ((localStorage.getItem("12")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("13").innerHTML = ((localStorage.getItem("13")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  document.getElementById("14").innerHTML = ((localStorage.getItem("14")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  */
-
   }
 
   else{
@@ -391,29 +415,6 @@ Book.cardOdds = function(){
     localStorage.setItem("14_odds",num);
     document.getElementById("14").innerHTML = num;
 
-    
-
-
-
-    /*
-    document.getElementById("2").innerHTML = 0;
-    document.getElementById("3").innerHTML = 0;
-    document.getElementById("4").innerHTML = 0;
-    document.getElementById("5").innerHTML = 0;
-    document.getElementById("6").innerHTML = 0;
-    document.getElementById("7").innerHTML = 0;
-    document.getElementById("8").innerHTML = 0;
-    document.getElementById("9").innerHTML = 0;
-    document.getElementById("10").innerHTML = 0;
-    document.getElementById("11").innerHTML = 0;
-    document.getElementById("12").innerHTML = 0;
-    document.getElementById("13").innerHTML = 0;
-    document.getElementById("14").innerHTML = 0;
-    */
-    
-
-
-
   }
 
 
@@ -454,7 +455,7 @@ Book.setShoe = function (x){
   var odd = 7.69;
 
 
-console.log(odd);
+//console.log(odd);
 
   document.getElementById("2").innerHTML = odd;
   document.getElementById("3").innerHTML = odd;
@@ -495,13 +496,13 @@ console.log(odd);
 
 Book.isValidCard = function(x){
 
-console.log(x);
+//console.log(x);
 
 var num = parseInt(x);
 
 //console.log("num" + num);
 
-console.log(localStorage.getItem(num));
+//console.log(localStorage.getItem(num));
 
 
 if(localStorage.getItem(num) >= 1){
@@ -552,14 +553,14 @@ Book.loader =  function(){
 
 
   if(localStorage.getItem("rc")){
-    console.log(localStorage.getItem("rc"));
+    //console.log(localStorage.getItem("rc"));
 
     document.getElementById("rct").innerHTML = localStorage.getItem("rc");
 
   }
 
   else{
-    console.log("here");
+    //console.log("here");
     document.getElementById("rct").innerHTML = 0;
 
   }
@@ -568,7 +569,7 @@ Book.loader =  function(){
   if(localStorage.getItem("shoe_size")){
 
     document.getElementById("change_shoe").innerHTML = localStorage.getItem("shoe_size");
-    console.log(localStorage.getItem("shoe_size"));
+    //console.log(localStorage.getItem("shoe_size"));
   
   }
 
