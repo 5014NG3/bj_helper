@@ -435,6 +435,8 @@ Book.setShoe = function (x){
 
   if (confirm("Clicking this will reset everything")) {
 
+  Book.cls();
+
   var num = parseInt(x);
 
 
@@ -486,6 +488,10 @@ Book.setShoe = function (x){
 
 
   document.getElementById("change_shoe").innerHTML = num;
+
+  document.onload = Book.loader();
+  document.onload = Book.loadOdds();
+
 
   }
 
