@@ -26,23 +26,29 @@
   </menu>
 
 
-      <div style = "float:right;">
+      <div style = "float:right;margin:5px;position:relative;">
 
-        <canvas id="myCanvas" width="45" height="275"
+      
+        <div>
+        <canvas id="myCanvas0" width="45" height="275"
         style="border:1px solid #c3c3c3;">
         Your browser does not support the canvas element.
         </canvas>
+        
+        </div>
 
+
+        
         <script>
-        var canvas = document.getElementById("myCanvas");
-        var ctx = canvas.getContext("2d");
-        ctx.fillStyle = "#FF0000";
-        ctx.fillRect(-40,40,150,150);
+
+        Book.drawCardBar("14");
         </script>
+
+        <div> A </div>
 
       </div>
 
-            <div style = "float:right;">
+      <div style = "float:right;margin:5px;">
 
         <canvas id="myCanvas1" width="45" height="275"
         style="border:1px solid #c3c3c3;">
@@ -50,13 +56,182 @@
         </canvas>
 
         <script>
-        var canvas = document.getElementById("myCanvas1");
-        var ctx = canvas.getContext("2d");
-        ctx.fillStyle = "#FF0000";
-        ctx.fillRect(-40,40,150,150);
+        Book.drawCardBar("13");
         </script>
 
+        <div> K </div>
+
       </div>
+
+      <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas2" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("12");
+        </script>
+
+        <div> Q </div>
+
+      </div>
+
+      <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas3" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("11");
+        </script>
+
+        <div> J </div>
+
+      </div>
+
+       <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas4" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("10");
+        </script>
+
+        <div> 10 </div>
+
+      </div>
+
+       <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas5" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("9");
+        </script>
+
+        <div> 9 </div>
+
+      </div>
+
+       <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas6" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("8");
+        </script>
+
+        <div> 8 </div>
+
+      </div>
+
+       <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas7" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("7");
+        </script>
+
+        <div> 7 </div>
+
+      </div>
+
+      <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas8" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("6");
+        </script>
+
+        <div> 6 </div>
+
+      </div>
+
+      <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas9" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("5");
+        </script>
+
+        <div> 5 </div>
+
+      </div>
+
+      <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas10" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("4");
+        </script>
+
+        <div> 4 </div>
+
+      </div>
+
+      <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas11" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("3");
+        </script>
+
+        <div> 3 </div>
+
+      </div>
+
+      <div style = "float:right;margin:5px;">
+
+        <canvas id="myCanvas12" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+        <script>
+        Book.drawCardBar("2");
+        </script>
+
+        <div> 2 </div>
+
+      </div>
+      
+
+      
+
+
 
 
   <div style = "float:left;">choose shoe size : &emsp; </div>
@@ -226,7 +401,8 @@ test div
 
 <script> 
 document.onload = Book.loader();
-document.onload = Book.loadOdds();
+//document.onload = Book.loadOdds();
+//document.onload = Book.loadGraphs();
  </script> 
 
 

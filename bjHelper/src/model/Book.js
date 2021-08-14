@@ -466,6 +466,14 @@ Book.setShoe = function (x){
 
 //console.log(odd);
 
+  for(let i = 2; i <= 14; i++){
+    var txt = i;
+    txt += "_odds";
+
+    localStorage.setItem(txt,odd);
+
+  }
+
   document.getElementById("2").innerHTML = odd;
   document.getElementById("3").innerHTML = odd;
   document.getElementById("4").innerHTML = odd;
@@ -522,6 +530,13 @@ if(localStorage.getItem(num) >= 1){
 
   Book.runningCount(num);
   Book.cardCounter(num);
+  for(let i = 2; i <= 14 ; i++){
+
+    var temp = parseInt(i);
+
+    Book.drawCardBar(temp);
+
+  }
   //Book.trueCount();
   //Book.cardOdds(num);
 
@@ -548,11 +563,53 @@ else{
 };
 
 
+Book.drawCardBar = function(x){
+
+
+  var num = parseInt(x);
+
+  var canvasText = "myCanvas";
+
+  canvasText+=(14-num);// 14 is the amount of bars + 1, so 13 + 1 for indexing
+
+  console.log(canvasText);
+
+  var oddsText = num;
+  oddsText += "_odds"
+
+  console.log("odtxt " + oddsText);
+
+  
+
+  var barCardFactor = localStorage.getItem(oddsText);
+  console.log("odds " + barCardFactor);
+
+  barCardFactor = barCardFactor/100;
+
+  console.log("bcf" + barCardFactor);
+
+  console.log(num);
+
+  var canvas = document.getElementById(canvasText);
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#33ccff";
+  ctx.fillRect(0,0,45,275);
+  ctx.clearRect(0,0,45,275-(275*barCardFactor));//this is what makes the bar go up or down
+
+
+
+
+};
+
 
 
 
 
 Book.loader =  function(){
+
+  Book.loadOdds();
+  Book.loadGraphs();
+
 
   if(localStorage.getItem("cardCount")){
 
@@ -715,5 +772,29 @@ Book.loadOdds = function(){
 
 
 };
+
+Book.loadGraphs = function(){
+
+  if(localStorage.getItem("shoe_size")){
+
+    for(let i = 2; i <= 14 ; i++){
+
+      var temp = parseInt(i);
+  
+      Book.drawCardBar(temp);
+  
+    }
+
+
+  }
+
+  else{
+
+    console.log("no odds available")
+  }
+
+
+
+}
 
 
