@@ -129,6 +129,8 @@ function Book( slots) {
   //localStorage.removeItem("rc");
   //localStorage.removeItem("cardCount")
   localStorage.clear();
+  window.location.reload();
+  //Book.loader();
 
   };
 
@@ -320,60 +322,23 @@ Book.cardOdds = function(){
   if(num){
 
 
-  
-  var num = ((localStorage.getItem("2")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("2_odds",num);
-  document.getElementById("2").innerHTML = num;
+  var card_odd; 
+  for(let i = 2; i<= 14; i++){
 
-  num = ((localStorage.getItem("3")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("3_odds",num);
-  document.getElementById("3").innerHTML = num;
+    card_odd = ((localStorage.getItem(i)/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
 
-  num = ((localStorage.getItem("4")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("4_odds",num);
-  document.getElementById("4").innerHTML = num;
-
-  num = ((localStorage.getItem("5")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("5_odds",num);
-  document.getElementById("5").innerHTML = num;
-
-  num = ((localStorage.getItem("6")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("6_odds",num);
-  document.getElementById("6").innerHTML = num;
-
-  num = ((localStorage.getItem("7")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("7_odds",num);
-  document.getElementById("7").innerHTML = num;
-
-  num = ((localStorage.getItem("8")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("8_odds",num);
-  document.getElementById("8").innerHTML = num;
-
-  num = ((localStorage.getItem("9")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("9_odds",num);
-  document.getElementById("9").innerHTML = num;
-
-  num = ((localStorage.getItem("10")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("10_odds",num);
-  document.getElementById("10").innerHTML = num;
-
-  num = ((localStorage.getItem("11")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("11_odds",num);
-  document.getElementById("11").innerHTML = num;
-
-  num = ((localStorage.getItem("12")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("12_odds",num);
-  document.getElementById("12").innerHTML = num;
-
-  num = ((localStorage.getItem("13")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("13_odds",num);
-  document.getElementById("13").innerHTML = num;
-
-  num = ((localStorage.getItem("14")/localStorage.getItem("shoe_total"))*(100)).toFixed(2);
-  localStorage.setItem("14_odds",num);
-  document.getElementById("14").innerHTML = num;
+    var txt = i;
+    txt += "_odds";
+    localStorage.setItem(txt,card_odd);
+    document.getElementById(i).innerHTML = card_odd;
 
 
+
+
+
+
+
+  }
 
   }
 
@@ -383,44 +348,20 @@ Book.cardOdds = function(){
     var num = 0;
 
     num = num.toFixed(2);
-    localStorage.setItem("2_odds",num);
-    document.getElementById("2").innerHTML = num;
 
-    localStorage.setItem("3_odds",num);
-    document.getElementById("3").innerHTML = num;
 
-    localStorage.setItem("4_odds",num);
-    document.getElementById("4").innerHTML = num;
+    for(let i = 2; i<=14;i++){
 
-    localStorage.setItem("5_odds",num);
-    document.getElementById("5").innerHTML = num;
+      var txt = i;
+      txt += "_odds";
 
-    localStorage.setItem("6_odds",num);
-    document.getElementById("6").innerHTML = num;
+      localStorage.setItem(txt,num);
+      document.getElementById(i).innerHTML = num;
+      
 
-    localStorage.setItem("7_odds",num);
-    document.getElementById("7").innerHTML = num;
 
-    localStorage.setItem("8_odds",num);
-    document.getElementById("8").innerHTML = num;
 
-    localStorage.setItem("9_odds",num);
-    document.getElementById("9").innerHTML = num;
-
-    localStorage.setItem("10_odds",num);
-    document.getElementById("10").innerHTML = num;
-
-    localStorage.setItem("11_odds",num);
-    document.getElementById("11").innerHTML = num;
-
-    localStorage.setItem("12_odds",num);
-    document.getElementById("12").innerHTML = num;
-
-    localStorage.setItem("13_odds",num);
-    document.getElementById("13").innerHTML = num;
-
-    localStorage.setItem("14_odds",num);
-    document.getElementById("14").innerHTML = num;
+    }
 
   }
 
@@ -444,23 +385,6 @@ Book.setShoe = function (x){
 
   localStorage.setItem("shoe_total",52*num);
 
-  localStorage.setItem("2",cards);
-  localStorage.setItem("3",cards);
-  localStorage.setItem("4",cards);
-  localStorage.setItem("5",cards);
-  localStorage.setItem("6",cards);
-  localStorage.setItem("7",cards);
-  localStorage.setItem("8",cards);
-  localStorage.setItem("9",cards);
-  localStorage.setItem("10",cards);
-  localStorage.setItem("11",cards);
-  localStorage.setItem("12",cards);
-  localStorage.setItem("13",cards);
-  localStorage.setItem("14",cards);
-
-
-
-
   var odd = 7.69;
 
 
@@ -472,21 +396,14 @@ Book.setShoe = function (x){
 
     localStorage.setItem(txt,odd);
 
+    localStorage.setItem(i,cards);
+
+    document.getElementById(i).innerHTML = odd;
+
+
+
   }
 
-  document.getElementById("2").innerHTML = odd;
-  document.getElementById("3").innerHTML = odd;
-  document.getElementById("4").innerHTML = odd;
-  document.getElementById("5").innerHTML = odd;
-  document.getElementById("6").innerHTML = odd;
-  document.getElementById("7").innerHTML = odd;
-  document.getElementById("8").innerHTML = odd;
-  document.getElementById("9").innerHTML = odd;
-  document.getElementById("10").innerHTML = odd;
-  document.getElementById("11").innerHTML = odd;
-  document.getElementById("12").innerHTML = odd;
-  document.getElementById("13").innerHTML = odd;
-  document.getElementById("14").innerHTML = odd;
 
 
 
@@ -677,6 +594,22 @@ Book.loader =  function(){
 Book.loadOdds = function(){
 
 
+  for(let i = 2; i<=14; i++){
+
+    var txt = i;
+    txt += "_odds";
+
+    if(localStorage.getItem(txt) !== null){
+
+      document.getElementById(i).innerHTML = localStorage.getItem(txt);
+  
+  
+    }
+
+
+  }
+
+  /*
   if(localStorage.getItem("2_odds") !== null){
 
     document.getElementById("2").innerHTML = localStorage.getItem("2_odds");
@@ -767,6 +700,8 @@ Book.loadOdds = function(){
 
 
   }
+
+  */
 
 
 
