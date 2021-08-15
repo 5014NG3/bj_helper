@@ -509,7 +509,7 @@ Book.drawCardBar = function(x){
 
   var canvas = document.getElementById(canvasText);
   var ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#33ccff";
+  ctx.fillStyle = "#228B22";
   ctx.fillRect(0,0,45,275);
   ctx.clearRect(0,0,45,275-(275*barCardFactor));//this is what makes the bar go up or down
 
