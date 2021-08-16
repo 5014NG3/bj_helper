@@ -126,11 +126,9 @@ function Book( slots) {
 
   Book.cls = function(){
 
-  //localStorage.removeItem("rc");
-  //localStorage.removeItem("cardCount")
   localStorage.clear();
   window.location.reload();
-  //Book.loader();
+  Book.loader();
 
   };
 
@@ -314,7 +312,11 @@ Book.cardOdds = function(){
     var txt = i;
     txt += "_odds";
     localStorage.setItem(txt,card_odd);
+    var alt = i;
+    alt += "_";
     document.getElementById(i).innerHTML = card_odd;
+    document.getElementById(alt).innerHTML = card_odd;//alt is the odds underneath graph
+
 
   }
 
@@ -335,9 +337,9 @@ Book.cardOdds = function(){
 
       localStorage.setItem(txt,num);
       document.getElementById(i).innerHTML = num;
-      
-
-
+      var alt = i;
+      alt += "_";
+      document.getElementById(alt).innerHTML = num;//alt is odds underneath graph
 
     }
 
@@ -365,9 +367,6 @@ Book.setShoe = function (x){
 
   var odd = 7.69;
 
-
-//console.log(odd);
-
   for(let i = 2; i <= 14; i++){
     var txt = i;
     txt += "_odds";
@@ -382,18 +381,11 @@ Book.setShoe = function (x){
 
   }
 
-
-
-
   localStorage.setItem("shoe_size",num);
-
-
-
 
   document.getElementById("change_shoe").innerHTML = num;
 
   document.onload = Book.loader();
-  document.onload = Book.loadOdds();
 
 
   }
@@ -412,19 +404,14 @@ Book.setShoe = function (x){
 
 Book.isValidCard = function(x){
 
-//console.log(x);
 
 var num = parseInt(x);
-
-//console.log("num" + num);
-
-//console.log(localStorage.getItem(num));
-
 
 if(localStorage.getItem(num) >= 1){
 
   Book.runningCount(num);
   Book.cardCounter(num);
+  Book.drawHiloGraph();
   for(let i = 2; i <= 14 ; i++){
 
     var temp = parseInt(i);
@@ -432,8 +419,6 @@ if(localStorage.getItem(num) >= 1){
     Book.drawCardBar(temp);
 
   }
-  //Book.trueCount();
-  //Book.cardOdds(num);
 
 
 }
@@ -458,6 +443,108 @@ else{
 };
 
 
+
+Book.drawHiloGraph = function(){
+
+ 
+  var hilo = 0;
+
+  var counter = 3;
+
+  for(let i = 2; i<=14; i++){
+
+    hilo += parseInt(localStorage.getItem(i));
+    console.log(i + " along with " + hilo);
+
+    
+
+
+    if(i==6){
+
+      var barCardFactor = (hilo/localStorage.getItem("shoe_total"));
+
+      var canvasText = "hilo_";
+      canvasText+=counter;
+    
+      var canvas = document.getElementById(canvasText);
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#228B22";
+      ctx.fillRect(0,0,45,275);
+      ctx.clearRect(0,0,45,275-(275*barCardFactor));//this is what makes the bar go up or down
+
+      var divid = "sum";
+      divid += counter--;
+
+      var hiloOdds = (barCardFactor*100).toFixed(2);
+
+      document.getElementById(divid).innerHTML = hiloOdds;
+
+      hilo = 0;
+
+
+
+
+      
+    }
+
+    if(i==9){
+
+      var barCardFactor = (hilo/localStorage.getItem("shoe_total"));
+
+      var canvasText = "hilo_";
+      canvasText+=counter;
+    
+      var canvas = document.getElementById(canvasText);
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#228B22";
+      ctx.fillRect(0,0,45,275);
+      ctx.clearRect(0,0,45,275-(275*barCardFactor));//this is what makes the bar go up or down
+
+      var divid = "sum";
+      divid += counter--;
+
+      var hiloOdds = (barCardFactor*100).toFixed(2);
+
+      document.getElementById(divid).innerHTML = hiloOdds;
+
+      hilo = 0;
+
+      
+    }
+
+    if(i==14){
+
+      var barCardFactor = (hilo/localStorage.getItem("shoe_total"));
+
+      var canvasText = "hilo_";
+      canvasText+=counter;
+    
+      var canvas = document.getElementById(canvasText);
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#228B22";
+      ctx.fillRect(0,0,45,275);
+      ctx.clearRect(0,0,45,275-(275*barCardFactor));//this is what makes the bar go up or down
+
+      var divid = "sum";
+      divid += counter--;
+
+      var hiloOdds = (barCardFactor*100).toFixed(2);
+
+      document.getElementById(divid).innerHTML = hiloOdds;
+
+      hilo = 0;
+
+      
+    }
+
+
+  }
+
+
+
+}
+
+
 Book.drawCardBar = function(x){
 
 
@@ -467,23 +554,12 @@ Book.drawCardBar = function(x){
 
   canvasText+=(14-num);// 14 is the amount of bars + 1, so 13 + 1 for indexing
 
-  console.log(canvasText);
-
   var oddsText = num;
   oddsText += "_odds"
 
-  console.log("odtxt " + oddsText);
-
-  
-
   var barCardFactor = localStorage.getItem(oddsText);
-  console.log("odds " + barCardFactor);
 
   barCardFactor = barCardFactor/100;
-
-  console.log("bcf" + barCardFactor);
-
-  console.log(num);
 
   var canvas = document.getElementById(canvasText);
   var ctx = canvas.getContext("2d");
@@ -500,9 +576,12 @@ Book.drawCardBar = function(x){
 
 Book.buttonCreateTest = function (){
 
+  var optionText = ["erstst 1", "erasetest 2", "ersaetst 3", "rersetst 4"];
+
 
   for(var i = 0; i < optionText.length; i++){
     var option = document.createElement("button");
+    option.setAttribute("onclick","Book.cls();");
     document.body.appendChild(option);
     option.innerHTML = optionText[i];
   }
@@ -595,7 +674,13 @@ Book.loadOdds = function(){
 
     if(localStorage.getItem(txt) !== null){
 
-      document.getElementById(i).innerHTML = localStorage.getItem(txt);
+      var codds = localStorage.getItem(txt);
+
+      document.getElementById(i).innerHTML = codds;
+
+      var alt = i;
+      alt += "_";
+      document.getElementById(alt).innerHTML = codds;
   
   
     }
@@ -617,6 +702,8 @@ Book.loadGraphs = function(){
       Book.drawCardBar(temp);
   
     }
+
+    Book.drawHiloGraph();
 
 
   }
