@@ -1,3 +1,68 @@
+class card{
+  constructor(symbol,black,red,left,value,odds) {
+    this.symbol = symbol;
+    this.black = black;
+    this.red = red;
+    this.left = left;
+    this.value = value;
+    this.odds = odds;
+  }
+
+  updateLeft(){
+    this.left-=1;
+  }
+
+  updateOdds(x){
+    this.odds = ((left/x)*100).toFixed(2);
+  }
+
+  get cardValue(){
+    return this.value;
+  }
+
+
+}
+
+
+class Shoe {
+  constructor(size) {
+    this.size = size;
+    this.totalCards = 52*size;
+    this.cards = new Map();
+    this.trueCount = 0;
+    
+    this.cards.set(2,new card(2,2*size,2*size,4*size,1,7.69));
+    this.cards.set(3,new card(3,2*size,2*size,4*size,1,7.69));
+    this.cards.set(4,new card(4,2*size,2*size,4*size,1,7.69));
+    this.cards.set(5,new card(5,2*size,2*size,4*size,1,7.69));
+    this.cards.set(6,new card(6,2*size,2*size,4*size,1,7.69));
+
+    this.cards.set(7,new card(7,2*size,2*size,4*size,0,7.69));
+    this.cards.set(8,new card(8,2*size,2*size,4*size,0,7.69));
+    this.cards.set(9,new card(9,2*size,2*size,4*size,0,7.69));
+
+    this.cards.set(10,new card(10,2*size,2*size,4*size,-1,7.69));
+    this.cards.set('J',new card('J',2*size,2*size,4*size,-1,7.69));
+    this.cards.set('Q',new card('Q',2*size,2*size,4*size,-1,7.69));
+    this.cards.set('K',new card('K',2*size,2*size,4*size,-1,7.69));
+    this.cards.set('A',new card('A',2*size,2*size,4*size,-1,7.69));
+
+    var jsonText = JSON.stringify(Array.from(this.cards.entries()));//map cant be strigified
+
+    console.log(JSON.stringify(jsonText));
+
+  }
+
+  updateTrueCount(symbol){
+
+
+  }
+
+
+
+}
+
+
 const counter = new Map();
 
 counter.set('2', 1);
@@ -224,14 +289,14 @@ Book.runningCount = function(x){
 Book.trueCount = function(){
 
   var num = parseInt(localStorage.getItem("rc"));
-  console.log("num " + num);
+  //console.log("num " + num);
 
   var decksLeft = parseInt(localStorage.getItem("shoe_total"))/52;
-  console.log("deeall " + decksLeft);
+  //console.log("deeall " + decksLeft);
 
   if(decksLeft > 1 ){
 
-    console.log("here");
+    //console.log("here");
 
 
     var tc = num / decksLeft;
@@ -240,7 +305,7 @@ Book.trueCount = function(){
 
   else{
 
-    console.log("here2");
+   // console.log("here2");
 
     var tc = num;
 
@@ -352,13 +417,23 @@ Book.cardOdds = function(){
 
 };
 
+
+
 Book.setShoe = function (x){
 
+
   if (confirm("Clicking this will reset everything")) {
+
+
+
 
   Book.cls();
 
   var num = parseInt(x);
+
+  var test = new Shoe(num);
+
+  console.log(JSON.stringify(test));
 
 
   var cards = 4*num;
@@ -377,9 +452,8 @@ Book.setShoe = function (x){
 
     document.getElementById(i).innerHTML = odd;
 
-
-
   }
+
 
   localStorage.setItem("shoe_size",num);
 
@@ -454,7 +528,7 @@ Book.drawHiloGraph = function(){
   for(let i = 2; i<=14; i++){
 
     hilo += parseInt(localStorage.getItem(i));
-    console.log(i + " along with " + hilo);
+    //console.log(i + " along with " + hilo);
 
     
 
