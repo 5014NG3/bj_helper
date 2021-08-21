@@ -7,22 +7,7 @@ class card{
     this.value = value;
     this.odds = odds;
   }
-
-  updateLeft(){
-    this.left-=1;
-  }
-
-  updateOdds(x){
-    this.odds = ((left/x)*100).toFixed(2);
-  }
-
-  get cardValue(){
-    return this.value;
-  }
-
-
 }
-
 
 class Shoe {
   constructor(size,system) {
@@ -33,9 +18,9 @@ class Shoe {
     this.trueCount = 0;
     this.runningCount = 0;
 
-    this.posOdds = 0;
-    this.neuOdds = 0;
-    this.negOdds = 0;
+    this.posOdds = 38.46;
+    this.neuOdds = 23.08;
+    this.negOdds = 38.46;
 
     this.cards.set(2,new card(2,2*size,2*size,4*size,1,7.69));
     this.cards.set(3,new card(3,2*size,2*size,4*size,1,7.69));
@@ -64,47 +49,16 @@ class Shoe {
 
   updateCard(symbol){
     var card = this.cards.get(symbol);
+    if(card.total >= 1){
     this.runningCount += card.value;
     this.totalCards-=1;
     card.total-=1;
+    }
     //card.odds = ((card.total/this.totalCards)*100).toFixed(2);
   }
 
-  updateCardOdds(){
-    for(let i = 2; i<=10; i++){
+  updateTrueCount(){
 
-      this.cards.get(i).odds = ((this.cards.get(i).total/this.totalCards)*100).toFixed(2);
-
-      if(i>=2 && i<=6){
-        this.posOdds+=this.cards.get(i).total;
-      }
-      if(i>=7 && i<=9){
-        this.neuOdds+=this.cards.get(i).total;
-      }
-      if(i == 10){
-        this.negOdds+=this.cards.get(i).total;
-      }
-
-    }
-    this.cards.get('J').odds = ((this.cards.get('J').total/this.totalCards)*100).toFixed(2);
-    this.negOdds+= this.cards.get('J').total;
-    this.cards.get('Q').odds = ((this.cards.get('Q').total/this.totalCards)*100).toFixed(2);
-    this.negOdds+= this.cards.get('Q').total;
-    this.cards.get('K').odds = ((this.cards.get('K').total/this.totalCards)*100).toFixed(2);
-    this.negOdds+= this.cards.get('K').total;
-    this.cards.get('A').odds = ((this.cards.get('A').total/this.totalCards)*100).toFixed(2);
-    this.negOdds+= this.cards.get('A').total;
-
-    this.posOdds = ((this.posOdds/this.totalCards)*100).toFixed(2);
-    this.neuOdds = ((this.neuOdds/this.totalCards)*100).toFixed(2);
-    this.negOdds = ((this.negOdds/this.totalCards)*100).toFixed(2);
-
-  }
-
-  updateShoe(symbol){
-
-    this.updateCard(symbol);
-    this.updateCardOdds();
     var decksLeft = this.totalCards/52;
 
     if(decksLeft > 1){
@@ -115,6 +69,84 @@ class Shoe {
     else{
       this.trueCount = this.runningCount;
     }
+
+    
+  }
+
+  updateCardOdds(){//can be used in loader
+
+    if(this.totalCards){
+    var i = 2;
+    console.log("here");
+    for (let [key,value] of this.cards) {
+
+      this.cards.get(key).odds = ((value.total/this.totalCards)*100).toFixed(2);
+
+      if(i>=2 && i<=6){
+
+        this.posOdds+=value.total;
+
+      }
+
+      if(i>=7 && i<=9){
+
+        this.neuOdds+=value.total;
+        
+      }
+
+      if(i>=10 && i<=14){
+
+        this.negOdds+=value.total;
+
+      }
+
+      i++;
+      
+    }
+    this.posOdds = ((this.posOdds/this.totalCards)*100).toFixed(2);
+    this.neuOdds = ((this.neuOdds/this.totalCards)*100).toFixed(2);
+    this.negOdds = ((this.negOdds/this.totalCards)*100).toFixed(2);
+  }
+  
+  else{
+    var zero = 0;
+
+    for (let [key,value] of this.cards) {
+
+      this.cards.get(key).odds = zero.toFixed(2);
+
+    }
+    this.posOdds = zero.toFixed(2);
+    this.neuOdds = zero.toFixed(2);
+    this.negOdds = zero.toFixed(2)
+  }
+
+
+  }
+  
+
+
+  updateBarGraph(symbol,odds){
+
+    var canvas_id = symbol;//change canvas name convention to J_canvas
+    canvas_id += "_canvas" 
+    var barCardFactor = odds/100;
+  
+    var canvas = document.getElementById(canvas_id);
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#228B22";
+    ctx.fillRect(0,0,45,275);
+    ctx.clearRect(0,0,45,275-(275*barCardFactor));//this is what makes the bar go up or down
+
+
+  }
+
+  updateShoe(symbol){
+
+    this.updateCard(symbol);
+    this.updateCardOdds();
+    this.updateTrueCount();
+
 
     var jsonText = JSON.stringify(Array.from(this.cards.entries()));//map cant be strigified
     console.log(JSON.stringify(jsonText));
@@ -493,11 +525,7 @@ Book.setShoe = function (x){
 
   var test = new Shoe(num,"Hi-lo");
 
-
-  test.updateShoe('J');
-
   console.log(JSON.stringify(test));
-
 
   var cards = 4*num;
 
