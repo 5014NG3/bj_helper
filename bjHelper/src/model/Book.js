@@ -1,9 +1,9 @@
 class card{
-  constructor(symbol,black,red,left,value,odds) {
+  constructor(symbol,black,red,total,value,odds) {
     this.symbol = symbol;
     this.black = black;
     this.red = red;
-    this.left = left;
+    this.total = total;
     this.value = value;
     this.odds = odds;
   }
@@ -25,12 +25,18 @@ class card{
 
 
 class Shoe {
-  constructor(size) {
+  constructor(size,system) {
+    this.system = system;
     this.size = size;
     this.totalCards = 52*size;
     this.cards = new Map();
     this.trueCount = 0;
-    
+    this.runningCount = 0;
+
+    this.posOdds = 0;
+    this.neuOdds = 0;
+    this.negOdds = 0;
+
     this.cards.set(2,new card(2,2*size,2*size,4*size,1,7.69));
     this.cards.set(3,new card(3,2*size,2*size,4*size,1,7.69));
     this.cards.set(4,new card(4,2*size,2*size,4*size,1,7.69));
@@ -47,18 +53,72 @@ class Shoe {
     this.cards.set('K',new card('K',2*size,2*size,4*size,-1,7.69));
     this.cards.set('A',new card('A',2*size,2*size,4*size,-1,7.69));
 
+    
+    //console.log("value   " + this.cards.get('J').value);
     var jsonText = JSON.stringify(Array.from(this.cards.entries()));//map cant be strigified
-
     console.log(JSON.stringify(jsonText));
-
-  }
-
-  updateTrueCount(symbol){
-
+    
 
   }
 
 
+  updateCard(symbol){
+    var card = this.cards.get(symbol);
+    this.runningCount += card.value;
+    this.totalCards-=1;
+    card.total-=1;
+    //card.odds = ((card.total/this.totalCards)*100).toFixed(2);
+  }
+
+  updateCardOdds(){
+    for(let i = 2; i<=10; i++){
+
+      this.cards.get(i).odds = ((this.cards.get(i).total/this.totalCards)*100).toFixed(2);
+
+      if(i>=2 && i<=6){
+        this.posOdds+=this.cards.get(i).total;
+      }
+      if(i>=7 && i<=9){
+        this.neuOdds+=this.cards.get(i).total;
+      }
+      if(i == 10){
+        this.negOdds+=this.cards.get(i).total;
+      }
+
+    }
+    this.cards.get('J').odds = ((this.cards.get('J').total/this.totalCards)*100).toFixed(2);
+    this.negOdds+= this.cards.get('J').total;
+    this.cards.get('Q').odds = ((this.cards.get('Q').total/this.totalCards)*100).toFixed(2);
+    this.negOdds+= this.cards.get('Q').total;
+    this.cards.get('K').odds = ((this.cards.get('K').total/this.totalCards)*100).toFixed(2);
+    this.negOdds+= this.cards.get('K').total;
+    this.cards.get('A').odds = ((this.cards.get('A').total/this.totalCards)*100).toFixed(2);
+    this.negOdds+= this.cards.get('A').total;
+
+    this.posOdds = ((this.posOdds/this.totalCards)*100).toFixed(2);
+    this.neuOdds = ((this.neuOdds/this.totalCards)*100).toFixed(2);
+    this.negOdds = ((this.negOdds/this.totalCards)*100).toFixed(2);
+
+  }
+
+  updateShoe(symbol){
+
+    this.updateCard(symbol);
+    this.updateCardOdds();
+    var decksLeft = this.totalCards/52;
+
+    if(decksLeft > 1){
+
+      this.trueCount = (this.runningCount/decksLeft).toFixed(2);
+
+    }
+    else{
+      this.trueCount = this.runningCount;
+    }
+
+    var jsonText = JSON.stringify(Array.from(this.cards.entries()));//map cant be strigified
+    console.log(JSON.stringify(jsonText));
+  }
 
 }
 
@@ -431,7 +491,10 @@ Book.setShoe = function (x){
 
   var num = parseInt(x);
 
-  var test = new Shoe(num);
+  var test = new Shoe(num,"Hi-lo");
+
+
+  test.updateShoe('J');
 
   console.log(JSON.stringify(test));
 
