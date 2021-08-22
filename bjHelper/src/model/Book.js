@@ -23,20 +23,33 @@ class Shoe {
     this.negOdds = 38.46;
 
     this.cards.set(2,new card(2,2*size,2*size,4*size,1,7.69));
+    this.divUpdate("your_2_odds",7.69);
     this.cards.set(3,new card(3,2*size,2*size,4*size,1,7.69));
+    this.divUpdate("your_3_odds",7.69);
     this.cards.set(4,new card(4,2*size,2*size,4*size,1,7.69));
+    this.divUpdate("your_4_odds",7.69);
     this.cards.set(5,new card(5,2*size,2*size,4*size,1,7.69));
+    this.divUpdate("your_5_odds",7.69);
     this.cards.set(6,new card(6,2*size,2*size,4*size,1,7.69));
+    this.divUpdate("your_6_odds",7.69);
 
     this.cards.set(7,new card(7,2*size,2*size,4*size,0,7.69));
+    this.divUpdate("your_7_odds",7.69);
     this.cards.set(8,new card(8,2*size,2*size,4*size,0,7.69));
+    this.divUpdate("your_8_odds",7.69);
     this.cards.set(9,new card(9,2*size,2*size,4*size,0,7.69));
+    this.divUpdate("your_9_odds",7.69);
 
     this.cards.set(10,new card(10,2*size,2*size,4*size,-1,7.69));
+    this.divUpdate("your_10_odds",7.69);
     this.cards.set('J',new card('J',2*size,2*size,4*size,-1,7.69));
+    this.divUpdate("your_J_odds",7.69);
     this.cards.set('Q',new card('Q',2*size,2*size,4*size,-1,7.69));
+    this.divUpdate("your_Q_odds",7.69);
     this.cards.set('K',new card('K',2*size,2*size,4*size,-1,7.69));
+    this.divUpdate("your_K_odds",7.69);
     this.cards.set('A',new card('A',2*size,2*size,4*size,-1,7.69));
+    this.divUpdate("your_A_odds",7.69);
 
     
     //console.log("value   " + this.cards.get('J').value);
@@ -46,6 +59,12 @@ class Shoe {
 
   }
 
+  divUpdate(id,value){
+    document.getElementById(id).innerHTML = value;
+  }
+
+
+
 
   updateCard(symbol){
     var card = this.cards.get(symbol);
@@ -54,7 +73,7 @@ class Shoe {
     this.totalCards-=1;
     card.total-=1;
     }
-    //card.odds = ((card.total/this.totalCards)*100).toFixed(2);
+    
   }
 
   updateTrueCount(){
@@ -64,10 +83,12 @@ class Shoe {
     if(decksLeft > 1){
 
       this.trueCount = (this.runningCount/decksLeft).toFixed(2);
+      this.divUpdate("true_count",this.trueCount);
 
     }
     else{
       this.trueCount = this.runningCount;
+      this.divUpdate("true_count",this.trueCount);
     }
 
     
@@ -81,6 +102,7 @@ class Shoe {
     for (let [key,value] of this.cards) {
 
       this.cards.get(key).odds = ((value.total/this.totalCards)*100).toFixed(2);
+      this.divUpdate("your_"+key+"_odds",this.cards.get(key).odds);
 
       if(i>=2 && i<=6){
 
@@ -114,6 +136,7 @@ class Shoe {
     for (let [key,value] of this.cards) {
 
       this.cards.get(key).odds = zero.toFixed(2);
+      this.divUpdate("your_"+key+"_odds",zero.toFixed(2));
 
     }
     this.posOdds = zero.toFixed(2);
@@ -148,8 +171,8 @@ class Shoe {
     this.updateTrueCount();
 
 
-    var jsonText = JSON.stringify(Array.from(this.cards.entries()));//map cant be strigified
-    console.log(JSON.stringify(jsonText));
+    //var jsonText = JSON.stringify(Array.from(this.cards.entries()));//map cant be strigified
+    //console.log(JSON.stringify(jsonText));
   }
 
 }
@@ -519,13 +542,17 @@ Book.setShoe = function (x){
 
 
 
-  Book.cls();
+  
 
   var num = parseInt(x);
 
   var test = new Shoe(num,"Hi-lo");
+  test.updateShoe("J");
+  test.updateCardOdds();
 
   console.log(JSON.stringify(test));
+
+  //Book.cls();
 
   var cards = 4*num;
 
