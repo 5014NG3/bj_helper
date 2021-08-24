@@ -23,47 +23,59 @@ class Shoe {
     this.negOdds = 38.46;
 
     this.cards.set(2,new card(2,2*size,2*size,4*size,1,7.69));
-    this.divUpdate("your_2_odds",7.69);
+    this.graphOddsHelper(2,7.69);
     this.cards.set(3,new card(3,2*size,2*size,4*size,1,7.69));
-    this.divUpdate("your_3_odds",7.69);
+    this.graphOddsHelper(3,7.69);
     this.cards.set(4,new card(4,2*size,2*size,4*size,1,7.69));
-    this.divUpdate("your_4_odds",7.69);
+    this.graphOddsHelper(4,7.69);
     this.cards.set(5,new card(5,2*size,2*size,4*size,1,7.69));
-    this.divUpdate("your_5_odds",7.69);
+    this.graphOddsHelper(5,7.69);
     this.cards.set(6,new card(6,2*size,2*size,4*size,1,7.69));
-    this.divUpdate("your_6_odds",7.69);
+    this.graphOddsHelper(6,7.69);
 
     this.cards.set(7,new card(7,2*size,2*size,4*size,0,7.69));
-    this.divUpdate("your_7_odds",7.69);
+    this.graphOddsHelper(7,7.69);
     this.cards.set(8,new card(8,2*size,2*size,4*size,0,7.69));
-    this.divUpdate("your_8_odds",7.69);
+    this.graphOddsHelper(8,7.69);
     this.cards.set(9,new card(9,2*size,2*size,4*size,0,7.69));
-    this.divUpdate("your_9_odds",7.69);
+    this.graphOddsHelper(9,7.69);
 
     this.cards.set(10,new card(10,2*size,2*size,4*size,-1,7.69));
-    this.divUpdate("your_10_odds",7.69);
+    this.graphOddsHelper(10,7.69);
     this.cards.set('J',new card('J',2*size,2*size,4*size,-1,7.69));
-    this.divUpdate("your_J_odds",7.69);
+    this.graphOddsHelper('J',7.69);
     this.cards.set('Q',new card('Q',2*size,2*size,4*size,-1,7.69));
-    this.divUpdate("your_Q_odds",7.69);
+    this.graphOddsHelper('Q',7.69);
     this.cards.set('K',new card('K',2*size,2*size,4*size,-1,7.69));
-    this.divUpdate("your_K_odds",7.69);
+    this.graphOddsHelper('K',7.69);
     this.cards.set('A',new card('A',2*size,2*size,4*size,-1,7.69));
-    this.divUpdate("your_A_odds",7.69);
+    this.graphOddsHelper('A',7.69);
 
     this.divUpdate("pos_odds",this.posOdds);
-    this.divUpdate("neut_odds",this.neuOdds);
-    this.divUpdate("neg_odds",this.negOdds);
+    this.updateBarGraph("pos",this.posOdds);
 
-    //console.log("value   " + this.cards.get('J').value);
-    var jsonText = JSON.stringify(Array.from(this.cards.entries()));//map cant be strigified
-    console.log(JSON.stringify(jsonText));
+    this.divUpdate("neu_odds",this.neuOdds);
+    this.updateBarGraph("neu",this.neuOdds);
     
+    this.divUpdate("neg_odds",this.negOdds);
+    this.updateBarGraph("neg",this.negOdds);
+
+    this.divUpdate("true_count",this.trueCount);
+    this.divUpdate("shoe_size",this.size);
+
 
   }
 
   divUpdate(id,value){
     document.getElementById(id).innerHTML = value;
+  }
+
+  graphOddsHelper(key,currentOdds){
+
+    this.divUpdate("your_"+key+"_odds",currentOdds);
+    this.divUpdate("other_"+key+"_odds",currentOdds);
+    this.updateBarGraph(key,currentOdds);
+
   }
 
   updateCard(symbol){
@@ -108,9 +120,7 @@ class Shoe {
 
       this.cards.get(key).odds = ((value.total/this.totalCards)*100).toFixed(2);
       var currentOdds = this.cards.get(key).odds;
-      this.divUpdate("your_"+key+"_odds",currentOdds);
-      this.divUpdate("other_"+key+"_odds",currentOdds);
-      this.updateBarGraph(key,currentOdds);
+      this.graphOddsHelper(key,currentOdds);
 
       if(i>=2 && i<=6){
 
@@ -135,10 +145,15 @@ class Shoe {
     }
     this.posOdds = ((this.posOdds/this.totalCards)*100).toFixed(2);
     this.updateBarGraph("pos",this.posOdds);
+    this.divUpdate("pos_odds",currentOdds);
+
     this.neuOdds = ((this.neuOdds/this.totalCards)*100).toFixed(2);
     this.updateBarGraph("neu",this.neuOdds);
+    this.divUpdate("neu_odds",currentOdds);
+    
     this.negOdds = ((this.negOdds/this.totalCards)*100).toFixed(2);
     this.updateBarGraph("neg",this.negOdds);
+    this.divUpdate("neg_odds",currentOdds);
 
   }
   
@@ -149,9 +164,7 @@ class Shoe {
     for (let [key,value] of this.cards) {
 
       this.cards.get(key).odds = zeroFix;
-      this.divUpdate("your_"+key+"_odds",zeroFix);
-      this.divUpdate("other_"+key+"_odds",currentOdds);
-      this.updateBarGraph(key,zeroFix);
+      this.graphOddsHelper(key,zeroFix);
 
     }
     this.posOdds = zeroFix;
@@ -180,10 +193,7 @@ class Shoe {
 
       var currentOdds = this.cards.get(key).odds;
 
-      this.divUpdate("your_"+key+"_odds",currentOdds);
-      this.divUpdate("other_"+key+"_odds",currentOdds);
-      
-      this.updateBarGraph(key,currentOdds)
+      this.graphOddsHelper(key,currentOdds);
       
     }
 
@@ -191,7 +201,7 @@ class Shoe {
     this.updateBarGraph("pos",this.posOdds);
 
     this.divUpdate("neu_odds",this.neuOdds);
-    this.updateBarGraph("neu",this.negOdds);
+    this.updateBarGraph("neu",this.neuOdds);
 
     this.divUpdate("neg_odds",this.negOdds);
     this.updateBarGraph("neg",this.negOdds);
@@ -251,46 +261,14 @@ class Shoe {
 
 
 
-Book.setShoe = function (x){
+Book.setShoe = function (num){
 
 
-  if (confirm("Clicking this will reset everything")) {
+  if (confirm("Clicking this will reset the shoe")) {
 
-  var num = parseInt(x);
-
-  var test = new Shoe(num,"Hi-lo");
-  test.updateShoe("J");
-  test.updateCardOdds();
-
-  console.log(JSON.stringify(test));
-
-  //Book.cls();
-
-  var cards = 4*num;
-
-  localStorage.setItem("shoe_total",52*num);
-
-  var odd = 7.69;
-
-  for(let i = 2; i <= 14; i++){
-    var txt = i;
-    txt += "_odds";
-
-    localStorage.setItem(txt,odd);
-
-    localStorage.setItem(i,cards);
-
-    document.getElementById(i).innerHTML = odd;
-
-  }
-
-
-  localStorage.setItem("shoe_size",num);
-
-  document.getElementById("change_shoe").innerHTML = num;
-
-  document.onload = Book.loader();
-
+  localStorage.clear();
+  var mainShoe = new Shoe(num,"Hi-lo");
+  localStorage.setItem('shoe', JSON.stringify(mainShoe));
 
   }
 

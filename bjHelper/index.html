@@ -90,7 +90,7 @@
 
 
   <div style = "float:left;">choose shoe size : &emsp; </div>
-  <div id = "change_shoe">   null </div> 
+  <div id = "shoe_size">   null </div> 
   <div id="shoe size">
     <button>undo</button>
     <button type = "button" onclick = "Book.setShoe(1)">1</button>
@@ -176,10 +176,11 @@
        <div style = "float:right;margin:5px;">
 
 
+        <canvas id="9_graph" width="45" height="275"
+        style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
 
-        <script>
-        Book.drawCardBar("9");
-        </script>
 
         <div> 9 </div>
         <div id = "9_graph_odds"> test </div> 
@@ -481,9 +482,8 @@ Book.buttonCreateTest();
 
 
 <script> 
-document.onload = Book.loader();
-//document.onload = Book.loadOdds();
-//document.onload = Book.loadGraphs();
+//document.onload = Book.loader();
+//need to update loader to accoomate for the shoe class.
  </script> 
 
 
