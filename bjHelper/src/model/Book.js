@@ -131,10 +131,6 @@ class Shoe {
     
   }
 
-  loadTrueCount(){
-
-    this.divUpdate("true_count",this.trueCount);
-  }
 
   updateCardOdds(){//can be used in loader
 
@@ -224,7 +220,7 @@ class Shoe {
   }
 
 
-  loadCardOdds(){
+  loadShoe(){
 
     let cardKeys = localStorage.getItem('cardKeys');
     for (let i = 0; i < cardKeys.length; i++) {
@@ -241,6 +237,9 @@ class Shoe {
 
     this.divUpdate("neg_odds",this.negOdds);
     this.updateBarGraph("neg",this.negOdds);
+
+    this.divUpdate("true_count",this.trueCount);
+    this.divUpdate("shoe_size",this.size);
  
 
 
@@ -271,11 +270,6 @@ class Shoe {
 
   }
 
-  loadShoe(){
-
-    this.loadCardOdds();
-    this.loadTrueCount();
-  }
 
 }
 
@@ -389,7 +383,7 @@ Book.loader =  function(){
   if(localStorage.getItem('shoe')){
 
     var currentShoe = Object.assign( new Shoe, JSON.parse(localStorage.getItem('shoe')) );
-    currentShoe.loadCardOdds();
+    currentShoe.loadShoe();
 
   }
     
