@@ -11,10 +11,9 @@ class card{
 
 class Shoe {
   constructor(size,system) {
-    this.system = system;
     this.size = size;
+    this.system = system;
     this.totalCards = 52*size;
-    this.cards = new Map();
     this.trueCount = 0;
     this.runningCount = 0;
 
@@ -22,34 +21,49 @@ class Shoe {
     this.neuOdds = 23.08;
     this.negOdds = 38.46;
 
-    this.cards.set(2,new card(2,2*size,2*size,4*size,1,7.69));
+  }
+
+
+  createShoe(){
+
+    localStorage.setItem('cardIndices',JSON.stringify([2,3,4,5,6,7,8,9,10,'J','Q','K','A']));
+
+
+
+    //console.dir(JSON.parse(localStorage.getItem('cardIndices'))[8]);
+
+
+
+    localStorage.setItem(2,new card(2,2*this.size,2*this.size,4*this.size,1,7.69));
     this.graphOddsHelper(2,7.69);
-    this.cards.set(3,new card(3,2*size,2*size,4*size,1,7.69));
+    localStorage.setItem(3,new card(3,2*this.size,2*this.size,4*this.size,1,7.69));
     this.graphOddsHelper(3,7.69);
-    this.cards.set(4,new card(4,2*size,2*size,4*size,1,7.69));
+    localStorage.setItem(4,new card(4,2*this.size,2*this.size,4*this.size,1,7.69));
     this.graphOddsHelper(4,7.69);
-    this.cards.set(5,new card(5,2*size,2*size,4*size,1,7.69));
+    localStorage.setItem(5,new card(5,2*this.size,2*this.size,4*this.size,1,7.69));
     this.graphOddsHelper(5,7.69);
-    this.cards.set(6,new card(6,2*size,2*size,4*size,1,7.69));
+    localStorage.setItem(6,new card(6,2*this.size,2*this.size,4*this.size,1,7.69));
     this.graphOddsHelper(6,7.69);
-
-    this.cards.set(7,new card(7,2*size,2*size,4*size,0,7.69));
+    
+    localStorage.setItem(7,new card(7,2*this.size,2*this.size,4*this.size,0,7.69));
     this.graphOddsHelper(7,7.69);
-    this.cards.set(8,new card(8,2*size,2*size,4*size,0,7.69));
+    localStorage.setItem(8,new card(8,2*this.size,2*this.size,4*this.size,0,7.69));
     this.graphOddsHelper(8,7.69);
-    this.cards.set(9,new card(9,2*size,2*size,4*size,0,7.69));
+    localStorage.setItem(9,new card(9,2*this.size,2*this.size,4*this.size,0,7.69));
     this.graphOddsHelper(9,7.69);
-
-    this.cards.set(10,new card(10,2*size,2*size,4*size,-1,7.69));
+    
+    localStorage.setItem(10,new card(10,2*this.size,2*this.size,4*this.size,-1,7.69));
     this.graphOddsHelper(10,7.69);
-    this.cards.set('J',new card('J',2*size,2*size,4*size,-1,7.69));
+    localStorage.setItem('J',new card('J',2*this.size,2*this.size,4*this.size,-1,7.69));
     this.graphOddsHelper('J',7.69);
-    this.cards.set('Q',new card('Q',2*size,2*size,4*size,-1,7.69));
+    localStorage.setItem('Q',new card('Q',2*this.size,2*this.size,4*this.size,-1,7.69));
     this.graphOddsHelper('Q',7.69);
-    this.cards.set('K',new card('K',2*size,2*size,4*size,-1,7.69));
+    localStorage.setItem('K',new card('K',2*this.size,2*this.size,4*this.size,-1,7.69));
     this.graphOddsHelper('K',7.69);
-    this.cards.set('A',new card('A',2*size,2*size,4*size,-1,7.69));
+    localStorage.setItem('A',new card('A',2*this.size,2*this.size,4*this.size,-1,7.69));
     this.graphOddsHelper('A',7.69);
+
+    //console.dir(localStorage);
 
     this.divUpdate("pos_odds",this.posOdds);
     this.updateBarGraph("pos",this.posOdds);
@@ -63,6 +77,24 @@ class Shoe {
     this.divUpdate("true_count",this.trueCount);
     this.divUpdate("shoe_size",this.size);
 
+  }
+
+  getCards(){
+    return this.cards;
+  }
+
+  getCardTotal(symb){
+    //console.log(this.cards.get(symb).total);
+
+    return parseInt(this.cards[symb].total);
+
+  }
+
+  getCardSymbol(symb){
+
+    console.log(symb);
+
+    return this.cards.get(symb).symbol;
 
   }
 
@@ -243,7 +275,6 @@ class Shoe {
 
 }
 
-
   class Book{
 
 
@@ -253,7 +284,7 @@ class Shoe {
 
   localStorage.clear();
   window.location.reload();
-  Book.loader();
+  //Book.loader();
 
   };
 
@@ -266,9 +297,14 @@ Book.setShoe = function (num){
 
   if (confirm("Clicking this will reset the shoe")) {
 
-  localStorage.clear();
+  //localStorage.clear();
   var mainShoe = new Shoe(num,"Hi-lo");
-  localStorage.setItem('shoe', JSON.stringify(mainShoe));
+  mainShoe.createShoe();
+
+
+  
+
+  
 
   }
 
@@ -284,35 +320,41 @@ Book.setShoe = function (num){
 
 
 
-Book.isValidCard = function(x){
+Book.isValidCard = function(symbol){
 
-if(localStorage.getItem(num) >= 1){
+if(!localStorage.getItem('shoe')){
 
-  Book.runningCount(num);
-  Book.cardCounter(num);
-  Book.drawHiloGraph();
-  for(let i = 2; i <= 14 ; i++){
+if(confirm("Please select shoe size to start using other operations")){
 
-    var temp = parseInt(i);
+}
 
-    Book.drawCardBar(temp);
+}
 
-  }
+else {
 
+var currentShoe = Object.assign( new Shoe, JSON.parse(localStorage.getItem('shoe')) );
+
+console.log(currentShoe.getCardTotal(symbol));
+
+
+if(currentShoe.getCardTotal(symbol) >= 1){
+
+  currentShoe.updateShoe(symbol);
+
+  localStorage.setItem('shoe',JSON.stringify(currentShoe));
 
 }
 
 else{
-
   var message = "There are no ";
 
-  message += convertToCard.get(x);
+  message += currentShoe.getCardSymbol(symbol);
   message += "'s left"
 
   if (confirm(message)) {
   }
 
-
+}
 
 }
 
@@ -349,124 +391,18 @@ Book.buttonCreateTest = function (){
 
 Book.loader =  function(){
 
-  Book.loadOdds();
-  Book.loadGraphs();
 
+  if(localStorage.getItem('shoe')){
 
-  if(localStorage.getItem("cardCount")){
-
-    document.getElementById("cardsCount").innerHTML = localStorage.getItem("cardCount");
-  }
-
-  else{
-
-    document.getElementById("cardsCount").innerHTML = 0;
-  }
-
-
-
-  if(localStorage.getItem("rc")){
-    //console.log(localStorage.getItem("rc"));
-
-    document.getElementById("rct").innerHTML = localStorage.getItem("rc");
+    var currentShoe = Object.assign( new Shoe, JSON.parse(localStorage.getItem('shoe')) );
+    currentShoe.loadCardOdds();
 
   }
-
-  else{
-    //console.log("here");
-    document.getElementById("rct").innerHTML = 0;
-
-  }
-
-
-  if(localStorage.getItem("shoe_size")){
-
-    document.getElementById("change_shoe").innerHTML = localStorage.getItem("shoe_size");
-    //console.log(localStorage.getItem("shoe_size"));
-  
-  }
-
-  else{
-
-    document.getElementById("change_shoe").innerHTML = "null";
-
-
-  }
-
-
-  if(localStorage.getItem("test")){
-
     
 
-    var num = parseInt(localStorage.getItem("test"));
-
-
-    document.getElementById("fart").innerHTML = num;
-
-  }
-  else{
-
-    document.getElementById("fart").innerHTML = "this shit is 0";
-
-  }
-
-
-
 
 
 };
 
-Book.loadOdds = function(){
-
-
-  for(let i = 2; i<=14; i++){
-
-    var txt = i;
-    txt += "_odds";
-
-    if(localStorage.getItem(txt) !== null){
-
-      var codds = localStorage.getItem(txt);
-
-      document.getElementById(i).innerHTML = codds;
-
-      var alt = i;
-      alt += "_";
-      document.getElementById(alt).innerHTML = codds;
-  
-  
-    }
-
-
-  }
-
-
-};
-
-Book.loadGraphs = function(){
-
-  if(localStorage.getItem("shoe_size")){
-
-    for(let i = 2; i <= 14 ; i++){
-
-      var temp = parseInt(i);
-  
-      Book.drawCardBar(temp);
-  
-    }
-
-    Book.drawHiloGraph();
-
-
-  }
-
-  else{
-
-    console.log("no odds available")
-  }
-
-
-
-}
 
 
