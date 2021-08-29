@@ -17,9 +17,9 @@ class Shoe {
     this.trueCount = 0;
     this.runningCount = 0;
 
-    this.posCards = 20*size;
-    this.neuCards = 12*size;
-    this.negCards = 20*size;
+    this.posCards = 0;
+    this.neuCards = 0;
+    this.negCards = 0;
 
     this.posOdds = 38.46;
     this.neuOdds = 23.08;
@@ -36,33 +36,33 @@ class Shoe {
     localStorage.setItem('cardKeys',cardKeys);
 
 
-    localStorage.setItem(2,new card(2,2*this.size,2*this.size,4*this.size,1,7.69));
+    localStorage.setItem(2,JSON.stringify(new card(2,2*this.size,2*this.size,4*this.size,1,7.69)));
     this.graphOddsHelper(2,7.69);
-    localStorage.setItem(3,new card(3,2*this.size,2*this.size,4*this.size,1,7.69));
+    localStorage.setItem(3,JSON.stringify(new card(3,2*this.size,2*this.size,4*this.size,1,7.69)));
     this.graphOddsHelper(3,7.69);
-    localStorage.setItem(4,new card(4,2*this.size,2*this.size,4*this.size,1,7.69));
+    localStorage.setItem(4,JSON.stringify(new card(4,2*this.size,2*this.size,4*this.size,1,7.69)));
     this.graphOddsHelper(4,7.69);
-    localStorage.setItem(5,new card(5,2*this.size,2*this.size,4*this.size,1,7.69));
+    localStorage.setItem(5,JSON.stringify(new card(5,2*this.size,2*this.size,4*this.size,1,7.69)));
     this.graphOddsHelper(5,7.69);
-    localStorage.setItem(6,new card(6,2*this.size,2*this.size,4*this.size,1,7.69));
+    localStorage.setItem(6,JSON.stringify(new card(6,2*this.size,2*this.size,4*this.size,1,7.69)));
     this.graphOddsHelper(6,7.69);
     
-    localStorage.setItem(7,new card(7,2*this.size,2*this.size,4*this.size,0,7.69));
+    localStorage.setItem(7,JSON.stringify(new card(7,2*this.size,2*this.size,4*this.size,0,7.69)));
     this.graphOddsHelper(7,7.69);
-    localStorage.setItem(8,new card(8,2*this.size,2*this.size,4*this.size,0,7.69));
+    localStorage.setItem(8,JSON.stringify(new card(8,2*this.size,2*this.size,4*this.size,0,7.69)));
     this.graphOddsHelper(8,7.69);
-    localStorage.setItem(9,new card(9,2*this.size,2*this.size,4*this.size,0,7.69));
+    localStorage.setItem(9,JSON.stringify(new card(9,2*this.size,2*this.size,4*this.size,0,7.69)));
     this.graphOddsHelper(9,7.69);
     
-    localStorage.setItem('T',new card(10,2*this.size,2*this.size,4*this.size,-1,7.69));
+    localStorage.setItem('T',JSON.stringify(new card('T',2*this.size,2*this.size,4*this.size,-1,7.69)));
     this.graphOddsHelper('T',7.69);
-    localStorage.setItem('J',new card('J',2*this.size,2*this.size,4*this.size,-1,7.69));
+    localStorage.setItem('J',JSON.stringify(new card('J',2*this.size,2*this.size,4*this.size,-1,7.69)));
     this.graphOddsHelper('J',7.69);
-    localStorage.setItem('Q',new card('Q',2*this.size,2*this.size,4*this.size,-1,7.69));
+    localStorage.setItem('Q',JSON.stringify(new card('Q',2*this.size,2*this.size,4*this.size,-1,7.69)));
     this.graphOddsHelper('Q',7.69);
-    localStorage.setItem('K',new card('K',2*this.size,2*this.size,4*this.size,-1,7.69));
+    localStorage.setItem('K',JSON.stringify(new card('K',2*this.size,2*this.size,4*this.size,-1,7.69)));
     this.graphOddsHelper('K',7.69);
-    localStorage.setItem('A',new card('A',2*this.size,2*this.size,4*this.size,-1,7.69));
+    localStorage.setItem('A',JSON.stringify(new card('A',2*this.size,2*this.size,4*this.size,-1,7.69)));
     this.graphOddsHelper('A',7.69);
 
     //console.dir(localStorage);
@@ -83,10 +83,9 @@ class Shoe {
 
   getCardTotal(symb){
     //console.log(this.cards.get(symb).total);
+    //console.dir(localStorage.getItem(symb));
 
-    console.dir(localStorage.getItem(symb));
-
-    return parseInt(localStorage.getItem(symb).total);
+    return JSON.parse(localStorage.getItem(symb)).total;
 
   }
 
@@ -104,11 +103,12 @@ class Shoe {
   }
 
   updateCard(symbol){
-    var card = this.cards.get(symbol);
+    var card = JSON.parse(localStorage.getItem(symbol));
     if(card.total >= 1){
     this.runningCount += card.value;
     this.totalCards-=1;
     card.total-=1;
+    localStorage.setItem(symbol,JSON.stringify(card));
     }
     
   }
@@ -139,37 +139,42 @@ class Shoe {
   updateCardOdds(){//can be used in loader
 
     if(this.totalCards){
-    let i = 2;
+    let x = 2;
     console.log("here");
     let cardKeys = localStorage.getItem('cardKeys');
+    this.posCards = 0;
+    this.neuCards = 0;
+    this.negCards = 0;
+
     for (let i = 0; i < cardKeys.length; i++) {
 
-      var value = localStorage.getItem(cardKeys[i]);
-      var currentOdds = ((value.total/this.totalCards)*100).toFixed(2);
+      var value = JSON.parse(localStorage.getItem(cardKeys[i]));//card object
+      var currentOdds = ((value.total/this.totalCards)*100).toFixed(2);//new odds as totalcards has changed
 
+      value.odds = currentOdds;//update odds in shoe object
 
-      localStorage.getItem(cardKeys[i]).odds = currentOdds;
-      this.graphOddsHelper(key,currentOdds);
+      localStorage.setItem(cardKeys[i],JSON.stringify(value));//update shoe object in ls
+      this.graphOddsHelper(cardKeys[i],currentOdds);//update graph
 
-      if(i>=2 && i<=6){
+      if(x>=2 && x<=6){
 
-        this.posCards-=value.total;
+        this.posCards+=value.total;
 
       }
 
-      if(i>=7 && i<=9){
+      if(x>=7 && x<=9){
 
-        this.neuCards-=value.total;
+        this.neuCards+=value.total;
         
       }
 
-      if(i>=10 && i<=14){
+      if(x>=10 && x<=14){
 
-        this.negCards-=value.total;
+        this.negCards+=value.total;
 
       }
 
-      i++;
+      x++;
       
     }
 
@@ -195,7 +200,7 @@ class Shoe {
 
     for (let i = 0; i < cardKeys.length; i++) {
 
-      localStorage.getItem(cardKeys[i]).odds = zeroFix;
+      JSON.parse(localStorage.getItem(cardKeys[i])).odds = zeroFix;
       this.graphOddsHelper(cardKeys[i],zeroFix);
 
     }
@@ -224,7 +229,7 @@ class Shoe {
     let cardKeys = localStorage.getItem('cardKeys');
     for (let i = 0; i < cardKeys.length; i++) {
 
-      this.graphOddsHelper(cardKeys[i],localStorage.getItem(cardKeys[i]).odds);
+      this.graphOddsHelper(cardKeys[i],JSON.parse(localStorage.getItem(cardKeys[i])).odds);
       
     }
 
@@ -299,6 +304,7 @@ Book.setShoe = function (num){
   //localStorage.clear();
   var mainShoe = new Shoe(num,"Hi-lo");
   mainShoe.createShoe();
+  localStorage.setItem('shoe',JSON.stringify(mainShoe));
 
 
   }
