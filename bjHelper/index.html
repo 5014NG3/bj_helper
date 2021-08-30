@@ -10,6 +10,7 @@
   <meta charset="UTF-8" />
   <title>Minimal JS front-end App Example</title>
   <script src="src/model/Book.js"></script>
+  <script src="src/model/bsSuggest.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 </head>
 <body>
@@ -64,32 +65,26 @@
 
 
 
-  <h1>Public Library</h1>
-  <h2>An Example of a Minimal JavaScript front-end App</h2>
+  <h1>Blackjack Helper</h1>
+  <h2>Used to count cards and see the odds of hitting a particular card</h2>
 
   
   <p>This app supports the following operations:</p>
 
   
   <menu>
-    <li><a href="listBooks.html"><button type="button">List all books</button></a></li>
-    <li><a href="createBook.html"><button type="button">Add a new book</button></a></li>
-    <li><a href="updateBook.html"><button type="button">Update a book</button></a></li>
-    <li><a href="deleteBook.html"><button type="button">Delete a book</button></a></li>
-    <li><button type="button" onclick="Book.setShoe()">Clear database</button></li>
-    <li><button type="button" onclick="Book.createTestData()">Create test data</button></li>
+    <li>Choose size of the shoe(decks used) to intialize the shoe</li>
+    <li>Choose the cards dealt to you under "Your cards"</li>
+    <li>Choose the cards dealt to everyone else including the dealer under "Other cards"</li>
+    <li>Undo - to undo misclicks</li>
+    <li>Redo - to undo an undo</li>
+    <li>Click start to indicate when you started receiving cards</li>
+    <li>Click end to indicate when you are finished receiving cards</li>
+
   </menu>
 
 
-      
-      
-
-      
-
-
-
-
-  <div style = "float:left;">choose shoe size : &emsp; </div>
+  <div style = "float:left;">Shoe size : &emsp; </div>
   <div id = "shoe_size">   null </div> 
   <div id="shoe size">
     <button>undo</button>

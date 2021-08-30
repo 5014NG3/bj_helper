@@ -65,8 +65,6 @@ class Shoe {
     localStorage.setItem('A',JSON.stringify(new card('A',2*this.size,2*this.size,4*this.size,-1,7.69)));
     this.graphOddsHelper('A',7.69);
 
-    //console.dir(localStorage);
-
     this.divUpdate("pos_odds",this.posOdds);
     this.updateBarGraph("pos",this.posOdds);
 
@@ -82,8 +80,6 @@ class Shoe {
   }
 
   getCardTotal(symb){
-    //console.log(this.cards.get(symb).total);
-    //console.dir(localStorage.getItem(symb));
 
     return JSON.parse(localStorage.getItem(symb)).total;
 
@@ -136,7 +132,6 @@ class Shoe {
 
     if(this.totalCards){
     let x = 2;
-    console.log("here");
     let cardKeys = localStorage.getItem('cardKeys');
     this.posCards = 0;
     this.neuCards = 0;
@@ -278,11 +273,19 @@ class Shoe {
 
   }
 
+  Book.testFunction = function(){
+
+    var testItem = new bsSuggest('T');
+    console.log(testItem.getCard());
+
+
+  };
+
   Book.cls = function(){
 
   localStorage.clear();
   window.location.reload();
-  //Book.loader();
+
 
   };
 
@@ -294,6 +297,8 @@ Book.setShoe = function (num){
 
 
   if (confirm("Clicking this will reset the shoe")) {
+
+  Book.testFunction();
 
   //localStorage.clear();
   var mainShoe = new Shoe(num,"Hi-lo");
@@ -321,10 +326,6 @@ if(confirm("Please select shoe size to start using other operations")){
 else {
 
 var currentShoe = Object.assign( new Shoe, JSON.parse(localStorage.getItem('shoe')) );
-
-console.log(currentShoe.getCardTotal(symbol));
-
-
 if(currentShoe.getCardTotal(symbol) >= 1){
 
   currentShoe.updateShoe(symbol);
