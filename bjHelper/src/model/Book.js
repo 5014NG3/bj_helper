@@ -300,7 +300,10 @@ Book.setShoe = function (num){
 
   Book.testFunction();
 
-  //localStorage.clear();
+  localStorage.setItem('undo','');
+  localStorage.setItem('redo','');
+
+  
   var mainShoe = new Shoe(num,"Hi-lo");
   mainShoe.createShoe();
   localStorage.setItem('shoe',JSON.stringify(mainShoe));
@@ -328,6 +331,9 @@ else {
 var currentShoe = Object.assign( new Shoe, JSON.parse(localStorage.getItem('shoe')) );
 if(currentShoe.getCardTotal(symbol) >= 1){
 
+  var reverse = new Reverse();
+  reverse.addToStack(symbol);
+
   currentShoe.updateShoe(symbol);
 
   localStorage.setItem('shoe',JSON.stringify(currentShoe));
@@ -341,6 +347,9 @@ else{
   message += "'s left"
 
   if (confirm(message)) {
+  }
+  else{
+    
   }
 
 }
