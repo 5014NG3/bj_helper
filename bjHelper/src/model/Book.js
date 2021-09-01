@@ -298,7 +298,7 @@ Book.setShoe = function (num){
 
   if (confirm("Clicking this will reset the shoe")) {
 
-  Book.testFunction();
+  //Book.testFunction();
 
   localStorage.setItem('undo','');
   localStorage.setItem('redo','');
@@ -331,8 +331,7 @@ else {
 var currentShoe = Object.assign( new Shoe, JSON.parse(localStorage.getItem('shoe')) );
 if(currentShoe.getCardTotal(symbol) >= 1){
 
-  var reverse = new Reverse();
-  reverse.addToStack(symbol);
+  Reverse.addToStack(symbol);
 
   currentShoe.updateShoe(symbol);
 
