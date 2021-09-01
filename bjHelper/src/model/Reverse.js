@@ -4,10 +4,17 @@ class Reverse{
 }
 
 Reverse.addToStack = function(cardSymbol){
+
+    
     var operations = localStorage.getItem('undo');
     operations += cardSymbol;
     localStorage.setItem('undo',operations);
-    console.log('opsStack '+operations);
+    console.log('undo '+operations);
+
+    if(localStorage.getItem('redo').length >= 1){
+        localStorage.setItem('redo','');
+        console.log("google docs redo");
+    }
 
     
 };
@@ -41,6 +48,7 @@ Reverse.redo = function(){
     undoOperations += currentRedo;
     console.log('undoOps '+undoOperations);
     localStorage.setItem('undo',undoOperations);
+    
     
 
     

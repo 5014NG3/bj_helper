@@ -332,7 +332,7 @@ var currentShoe = Object.assign( new Shoe, JSON.parse(localStorage.getItem('shoe
 if(currentShoe.getCardTotal(symbol) >= 1){
 
   Reverse.addToStack(symbol);
-
+ 
   currentShoe.updateShoe(symbol);
 
   localStorage.setItem('shoe',JSON.stringify(currentShoe));
