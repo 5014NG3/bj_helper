@@ -98,6 +98,18 @@ class Shoe {
 
   }
 
+  undoCard(symbol){
+    var card = JSON.parse(localStorage.getItem(symbol));
+    //if(card.total >= 1){
+    this.runningCount -= card.value;
+    this.totalCards+=1;
+    card.total+=1;
+    localStorage.setItem(symbol,JSON.stringify(card));
+    //}
+
+
+  }
+
   updateCard(symbol){
     var card = JSON.parse(localStorage.getItem(symbol));
     if(card.total >= 1){
@@ -265,6 +277,17 @@ class Shoe {
 
   }
 
+  undoShoe(symbol){
+
+    this.undoCard(symbol);
+    this.updateCardOdds();
+    this.updateTrueCount();
+
+
+
+
+  }
+
 
 }
 
@@ -320,7 +343,7 @@ Book.isValidCard = function(symbol){
 
 if(!localStorage.getItem('shoe')){
 
-if(confirm("Please select shoe size to start using other operations")){
+if(confirm("Please select shoe size to use this operation.")){
 
 }
 
