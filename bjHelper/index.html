@@ -7,7 +7,7 @@
   <meta charset="UTF-8" />
   <title>Minimal JS front-end App Example</title>
   <script src="src/model/Book.js"></script>
-  <script src="src/model/bsSuggest.js"></script>
+  <script src="src/model/Hands.js"></script>
   <script src="src/model/Reverse.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 </head>
@@ -258,7 +258,16 @@
 
       </div>
 
-  <p>Your Cards</p>
+  <div id = "handCreate">
+
+  <div style = "margin-bottom:15px;" >Your Cards</div>
+
+  <button type = "button" onclick = "Hands.choosing(1);" style = "margin-left:7px;margin-right:577px">Start hand</button>
+  <button type = "button" onclick = "Hands.choosing(0);" >End hand</button>
+
+  <p style = "margin-bottom:25px"></p>
+ 
+  </div>
     <div style="margin:5px" id="your_cards">
 
     <button type = "button" style="width:45px;height:21px;margin:2px;float:left;" onclick = "Reverse.undo()">undo</button>
